@@ -1,0 +1,11 @@
+na questão 2 letra c ele descontou 2 décimos porque o cpf_cliente já é um índice na tabela consulta.
+
+na questão 3 letra c eu perdi bastante tempo sem entender porque não estava funcionando a questão sendo que na minha cabeça estava tudo certo, quando cheguei em casa que fui analizar vi que o erro era PQ ESCREVI NO CODIGO RETURN AO INVES DE RETURNS COM S kkkkkkk quem nunca cometeu um erro desses né :(, dito isso ele descontou 1 decimo da questão e a letra d estava incompleta por causa disso.
+
+na questão 4 letra a eu escrevi corretamente o que devia ser utilizado, mais para enfeitar meti um "na duvida utilize o nível de isolamento 3" o que esta totalmente errado pois, não devemos utilizar o nível de isolamento 3 só por ele ser o mais completo ao se tratar do hospital por exemplo que contem uma alta quantidade de acessos simultâneos o nível serializable vai deixar o sistema com mais bloqueios e assim portanto mais lento, perdi minha chance de ficar quieto e não falar demais e perdi pontos por isso kk 
+
+tirando isso as outras questões estão corretas, foram erros simples mais Pablo sempre da um descontinho nesses pequenos erros, tentem ser objetivos nas questões abertas e se por acaso tiverem com dificuldades em alguma questão pule para a próxima as vezes só precisa refrescar a cabeça no caso foi eu perdendo tempo na questão 3 por ter esquecido o s da função returns e perdi muito tempo fazendo e refazendo ela...
+
+!!Alguns comentários no meu arquivo sql eu inseri agora para dar uma ideia das dificuldades que tive na prova e para ajudar a entender melhor o codigo, ignorem alguns deles pois pablo sempre observa e pode descontar ponto por algum comentário indevido!!
+
+!!! Salvem esses arquivos em um pendrive ou no seu computador e levem para a prova pablo permite consulta e as provas dele sempre cai um tipo de consulta parecido com o do semestre anterior, ae no dia da prova basta copiar a consulta e mudar os dados ou utilizala para terem uma ideia de como é a consulta, desejo uma boa prova !!!
