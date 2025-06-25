@@ -1,0 +1,96 @@
+// Como estamos trabalhando com o modelo de banco de dados não relacional, seria possível integrar a coleção administradores dentro da coleção equipamentos, onde o sql para isso seria:
+
+/*
+
+SELECT JSON_OBJECT(
+    '_id', E.tombo,
+    'nome', E.nome,
+    'status', E.status,
+    'dataHoraAtualizacaoStatus', E.dataHoraAtualizacaoStatus,
+    'mantidoPor', JSON_OBJECT(
+        '_id', A.codAdm,
+        'nome', A.nome,
+        'login', A.login,
+        'senha', A.senha
+    )
+)
+FROM Equipamento AS E
+JOIN Administrador AS A ON E.codAdm = A.codAdm;
+
+*/
+
+// E o Json seria:
+[
+  {
+    "_id": "1",
+    "nome": "Data Show",
+    "status": "disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "_id": "1",
+      "nome": "Pablo Freire Matos",
+      "login": "pablo",
+      "senha": "matos"
+    }
+  },
+  {
+    "_id": "2",
+    "nome": "Lousa Digital",
+    "status": "disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "_id": "1",
+      "nome": "Pablo Freire Matos",
+      "login": "pablo",
+      "senha": "matos"
+    }
+  },
+  {
+    "_id": "3",
+    "nome": "Microfone",
+    "status": "disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "_id": "1",
+      "nome": "Pablo Freire Matos",
+      "login": "pablo",
+      "senha": "matos"
+    }
+  },
+  {
+    "_id": "4",
+    "nome": "Caixa de Som",
+    "status": "não disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "_id": "1",
+      "nome": "Pablo Freire Matos",
+      "login": "pablo",
+      "senha": "matos"
+    }
+  },
+  {
+    "_id": "5",
+    "nome": "Quadro Branco",
+    "status": "não disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "_id": "2",
+      "nome": "Liojes de Oliveira Carneiro",
+      "login": "Liojes",
+      "senha": "Carneiro"
+    }
+  },
+  {
+    "_id": "6",
+    "nome": "Notebook",
+    "status": "disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "_id": "1",
+      "nome": "Pablo Freire Matos",
+      "login": "pablo",
+      "senha": "matos"
+    }
+  }
+]

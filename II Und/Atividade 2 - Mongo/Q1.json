@@ -1,0 +1,459 @@
+// Coleção 1 - administradores:
+
+[
+  {
+    "_id": "1",
+    "nome": "Pablo Freire Matos",
+    "login": "pablo",
+    "senha": "matos"
+  },
+  {
+    "_id": "2",
+    "nome": "Liojes de Oliveira Carneiro",
+    "login": "Liojes",
+    "senha": "Carneiro"
+  }
+]
+
+// Coleção 2 - servidores:
+
+[
+  {
+    "_id": "1",
+    "nome": "Marcélia Porto Rocha",
+    "email": "murilo@gmail.com",
+    "telefones": [
+      "77999984511",
+      "77988112622"
+    ]
+  },
+  {
+    "_id": "2",
+    "nome": "Gutemberg Júnior",
+    "email": "gutemberg@hotmail.com",
+    "telefones": [
+      "77998552233",
+      "77991657844",
+      "77988554355"
+    ]
+  },
+  {
+    "_id": "3",
+    "nome": "Paulo Zainer de Oliveira Barbosa",
+    "email": "paulo@gmail.com",
+    "telefones": [
+      "77988445566"
+    ]
+  },
+  {
+    "_id": "4",
+    "nome": "José Roberto Azevedo",
+    "email": "zeazevedo@gmail.com",
+    "telefones": []
+  },
+  {
+    "_id": "5",
+    "nome": "Carlos Matheus Rodrigues",
+    "email": "carmatro@gmail.com",
+    "telefones": []
+  }
+]
+
+// Coleção 3 - equipamentos:
+
+[
+  {
+    "_id": "1",
+    "nome": "Data Show",
+    "status": "disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "codAdm": "1",
+      "nome": "Pablo Freire Matos"
+    }
+  },
+  {
+    "_id": "2",
+    "nome": "Lousa Digital",
+    "status": "disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "codAdm": "1",
+      "nome": "Pablo Freire Matos"
+    }
+  },
+  {
+    "_id": "3",
+    "nome": "Microfone",
+    "status": "disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "codAdm": "1",
+      "nome": "Pablo Freire Matos"
+    }
+  },
+  {
+    "_id": "4",
+    "nome": "Caixa de Som",
+    "status": "não disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "codAdm": "1",
+      "nome": "Pablo Freire Matos"
+    }
+  },
+  {
+    "_id": "5",
+    "nome": "Quadro Branco",
+    "status": "não disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "codAdm": "2",
+      "nome": "Liojes de Oliveira Carneiro"
+    }
+  },
+  {
+    "_id": "6",
+    "nome": "Notebook",
+    "status": "disponível",
+    "dataHoraAtualizacaoStatus": "2025-06-18T20:52:33Z",
+    "mantidoPor": {
+      "codAdm": "1",
+      "nome": "Pablo Freire Matos"
+    }
+  }
+]
+
+// Coleção 4 - reservasAuditorio:
+
+[
+  {
+    "_id": "1",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-05",
+    "status": "reservado",
+    "horaInicio": "10:00",
+    "horaFim": "12:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "1",
+      "nome": "Marcélia Porto Rocha",
+      "email": "murilo@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "1",
+        "nome": "Data Show"
+      },
+      {
+        "tombo": "2",
+        "nome": "Lousa Digital"
+      },
+      {
+        "tombo": "3",
+        "nome": "Microfone"
+      }
+    ]
+  },
+  {
+    "_id": "2",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-05",
+    "status": "reservado",
+    "horaInicio": "14:00",
+    "horaFim": "18:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "1",
+      "nome": "Marcélia Porto Rocha",
+      "email": "murilo@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "1",
+        "nome": "Data Show"
+      },
+      {
+        "tombo": "3",
+        "nome": "Microfone"
+      }
+    ]
+  },
+  {
+    "_id": "3",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-06",
+    "status": "reservado",
+    "horaInicio": "08:00",
+    "horaFim": "12:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "1",
+      "nome": "Marcélia Porto Rocha",
+      "email": "murilo@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "1",
+        "nome": "Data Show"
+      },
+      {
+        "tombo": "2",
+        "nome": "Lousa Digital"
+      },
+      {
+        "tombo": "3",
+        "nome": "Microfone"
+      }
+    ]
+  },
+  {
+    "_id": "4",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-06",
+    "status": "reservado",
+    "horaInicio": "14:00",
+    "horaFim": "18:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "2",
+      "nome": "Gutemberg Júnior",
+      "email": "gutemberg@hotmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "1",
+        "nome": "Data Show"
+      },
+      {
+        "tombo": "2",
+        "nome": "Lousa Digital"
+      },
+      {
+        "tombo": "3",
+        "nome": "Microfone"
+      }
+    ]
+  },
+  {
+    "_id": "5",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-07",
+    "status": "reservado",
+    "horaInicio": "08:00",
+    "horaFim": "18:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "2",
+      "nome": "Gutemberg Júnior",
+      "email": "gutemberg@hotmail.com"
+    },
+    "equipamentoReservado": []
+  },
+  {
+    "_id": "6",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-10",
+    "status": "solicitado",
+    "horaInicio": "08:00",
+    "horaFim": "11:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": null,
+    "equipamentoReservado": []
+  },
+  {
+    "_id": "7",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-09",
+    "status": "reservado",
+    "horaInicio": "08:00",
+    "horaFim": "10:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "4",
+      "nome": "José Roberto Azevedo",
+      "email": "zeazevedo@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "1",
+        "nome": "Data Show"
+      }
+    ]
+  },
+  {
+    "_id": "8",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-12",
+    "status": "reservado",
+    "horaInicio": "08:00",
+    "horaFim": "10:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "4",
+      "nome": "José Roberto Azevedo",
+      "email": "zeazevedo@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "2",
+        "nome": "Lousa Digital"
+      }
+    ]
+  },
+  {
+    "_id": "9",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-13",
+    "status": "reservado",
+    "horaInicio": "08:00",
+    "horaFim": "10:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "4",
+      "nome": "José Roberto Azevedo",
+      "email": "zeazevedo@gmail.com"
+    },
+    "equipamentoReservado": []
+  },
+  {
+    "_id": "10",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-14",
+    "status": "reservado",
+    "horaInicio": "08:00",
+    "horaFim": "10:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "4",
+      "nome": "José Roberto Azevedo",
+      "email": "zeazevedo@gmail.com"
+    },
+    "equipamentoReservado": []
+  },
+  {
+    "_id": "11",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-15",
+    "status": "reservado",
+    "horaInicio": "08:00",
+    "horaFim": "10:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "4",
+      "nome": "José Roberto Azevedo",
+      "email": "zeazevedo@gmail.com"
+    },
+    "equipamentoReservado": []
+  },
+  {
+    "_id": "12",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-19",
+    "status": "reservado",
+    "horaInicio": "14:00",
+    "horaFim": "18:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "5",
+      "nome": "Carlos Matheus Rodrigues",
+      "email": "carmatro@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "1",
+        "nome": "Data Show"
+      }
+    ]
+  },
+  {
+    "_id": "13",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-20",
+    "status": "reservado",
+    "horaInicio": "14:00",
+    "horaFim": "18:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "5",
+      "nome": "Carlos Matheus Rodrigues",
+      "email": "carmatro@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "2",
+        "nome": "Lousa Digital"
+      }
+    ]
+  },
+  {
+    "_id": "14",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-21",
+    "status": "reservado",
+    "horaInicio": "14:00",
+    "horaFim": "18:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "5",
+      "nome": "Carlos Matheus Rodrigues",
+      "email": "carmatro@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "3",
+        "nome": "Microfone"
+      }
+    ]
+  },
+  {
+    "_id": "15",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-22",
+    "status": "reservado",
+    "horaInicio": "14:00",
+    "horaFim": "18:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "5",
+      "nome": "Carlos Matheus Rodrigues",
+      "email": "carmatro@gmail.com"
+    },
+    "equipamentoReservado": []
+  },
+  {
+    "_id": "16",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-22",
+    "status": "reservado",
+    "horaInicio": "14:00",
+    "horaFim": "18:00",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "5",
+      "nome": "Carlos Matheus Rodrigues",
+      "email": "carmatro@gmail.com"
+    },
+    "equipamentoReservado": []
+  },
+  {
+    "_id": "17",
+    "motivo": "Reserva Pessoal",
+    "data": "2019-10-23",
+    "status": "reservado",
+    "horaInicio": "13:30",
+    "horaFim": "15:30",
+    "dataHoraSolicitacao": "2019-06-18T20:52:33Z",
+    "reservadoPor": {
+      "siape": "1",
+      "nome": "Marcélia Porto Rocha",
+      "email": "murilo@gmail.com"
+    },
+    "equipamentoReservado": [
+      {
+        "tombo": "6",
+        "nome": "Notebook"
+      }
+    ]
+  }
+]
