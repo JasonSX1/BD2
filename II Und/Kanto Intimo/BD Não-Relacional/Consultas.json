@@ -1,0 +1,559 @@
+//Quais os produtos mais vendidos (em unidades) no período de X a Y? 
+
+SELECT 
+    p.idProduto,
+    p.nome AS produto,
+    SUM(pp.quantidadeProduto) AS total_vendido
+FROM Pedido_Produto pp
+JOIN Pedido pe ON pp.codPedido = pe.codPedido
+JOIN Produto p ON pp.idProduto = p.idProduto
+WHERE pe.data BETWEEN '2023-01-01' AND '2023-12-31'
+GROUP BY p.idProduto, p.nome
+ORDER BY total_vendido DESC;
+
+// ===============================================================================================================================================================================================
+
+db.pedido.aggregate([
+  {
+    // Filtra apenas pedidos no intervalo de datas desejado
+    $match: {
+      data: {
+        $gte: "2023-01-01",
+        $lte: "2023-12-31"
+      }
+    }
+  },
+  {
+    // "explode" o array de itens para processar item por item
+    $unwind: "$itens"
+  },
+  {
+    // Agrupa por idProduto e soma as quantidades
+    $group: {
+      _id: "$itens.idProduto",
+      total_vendido: { $sum: "$itens.quantidade" }
+    }
+  },
+  {
+    // Faz o join manual com a coleção de produtos para pegar o nome
+    $lookup: {
+      from: "produto",
+      localField: "_id",
+      foreignField: "_id",
+      as: "produto_info"
+    }
+  },
+  {
+    // Transforma o array `produto_info` em objeto simples
+    $unwind: "$produto_info"
+  },
+  {
+    // Projeta o resultado com id, nome e total
+    $project: {
+      _id: 0,
+      idProduto: "$_id",
+      produto: "$produto_info.nome",
+      total_vendido: 1
+    }
+  },
+  {
+    // Ordena pelos mais vendidos
+    $sort: {
+      total_vendido: -1
+    }
+  }
+]);
+
+// ===============================================================================================================================================================================================
+
+/*
+1. Análise de Rentabilidade por Categoria de Produto
+Objetivo: Identificar quais categorias de produtos são mais lucrativas, comparando a receita total de vendas com o custo de aquisição dos produtos. Isso ajuda a decidir onde investir em marketing e quais categorias negociar melhores preços com fornecedores.
+
+Consulta SQL:
+*/
+
+
+SELECT
+    c.nome AS Categoria,
+    SUM(pp.quantidadeProduto) AS TotalItensVendidos,
+    SUM(pp.quantidadeProduto * pp.precoUnitario) AS ReceitaBruta,
+    SUM(pp.quantidadeProduto * Custo.custo_medio_unitario) AS CustoTotal,
+    (SUM(pp.quantidadeProduto * pp.precoUnitario) - SUM(pp.quantidadeProduto * Custo.custo_medio_unitario)) AS LucroBruto
+FROM Categoria c
+JOIN Produto p ON c.ID = p.idCategoria
+JOIN Pedido_Produto pp ON p.idProduto = pp.idProduto
+JOIN (
+    -- Subconsulta para calcular o custo médio de cada produto
+    SELECT
+        idProduto,
+        AVG(valor) AS custo_medio_unitario
+    FROM Fornecedor_Produto
+    GROUP BY idProduto
+) AS Custo ON p.idProduto = Custo.idProduto
+GROUP BY c.nome
+ORDER BY LucroBruto DESC;
+
+// ===============================================================================================================================================================================================
+
+db.pedido.aggregate([
+  // "Explode" os itens para análise individual
+  { $unwind: "$itens" },
+
+  // Agrupa por idProduto e acumula total vendido e receita
+  {
+    $group: {
+      _id: "$itens.idProduto",
+      totalVendido: { $sum: "$itens.quantidade" },
+      receitaBruta: {
+        $sum: { $multiply: ["$itens.quantidade", "$itens.precoUnitario"] }
+      }
+    }
+  },
+
+  // Lookup para pegar info do produto (inclui categoria)
+  {
+    $lookup: {
+      from: "produto",
+      localField: "_id",
+      foreignField: "_id",
+      as: "produto"
+    }
+  },
+  { $unwind: "$produto" },
+
+  // Lookup para pegar fornecedores e calcular custo médio
+  {
+    $lookup: {
+      from: "fornecedor",
+      let: { prodId: "$_id" },
+      pipeline: [
+        { $unwind: "$produtos_fornecidos" },
+        { $match: { $expr: { $eq: ["$produtos_fornecidos.idProduto", "$$prodId"] } } },
+        {
+          $group: {
+            _id: "$produtos_fornecidos.idProduto",
+            custo_medio_unitario: { $avg: "$produtos_fornecidos.valor" }
+          }
+        }
+      ],
+      as: "custo"
+    }
+  },
+  {
+    $unwind: {
+      path: "$custo",
+      preserveNullAndEmptyArrays: true // caso não haja fornecedor
+    }
+  },
+
+  // Calcula o custo total e lucro bruto
+  {
+    $addFields: {
+      custoTotal: {
+        $cond: {
+          if: { $gt: ["$custo.custo_medio_unitario", null] },
+          then: { $multiply: ["$totalVendido", "$custo.custo_medio_unitario"] },
+          else: 0
+        }
+      },
+      categoria: "$produto.categoria.nome"
+    }
+  },
+
+  // Agrupa por categoria
+  {
+    $group: {
+      _id: "$categoria",
+      TotalItensVendidos: { $sum: "$totalVendido" },
+      ReceitaBruta: { $sum: "$receitaBruta" },
+      CustoTotal: { $sum: "$custoTotal" }
+    }
+  },
+
+  // Calcula lucro
+  {
+    $addFields: {
+      LucroBruto: { $subtract: ["$ReceitaBruta", "$CustoTotal"] },
+      Categoria: "$_id"
+    }
+  },
+
+  // Formata saída final
+  {
+    $project: {
+      _id: 0,
+      Categoria: 1,
+      TotalItensVendidos: 1,
+      ReceitaBruta: 1,
+      CustoTotal: 1,
+      LucroBruto: 1
+    }
+  },
+
+  // Ordena por lucro
+  { $sort: { LucroBruto: -1 } }
+]);
+
+
+// ===============================================================================================================================================================================================
+
+/*
+Como Funciona:
+
+Subconsulta (Custo): Primeiro, calculamos o custo médio de aquisição de cada produto a partir da tabela Fornecedor_Produto.
+
+JOINs: Unimos as tabelas Categoria, Produto, Pedido_Produto e a subconsulta Custo.
+
+Cálculos:
+
+ReceitaBruta: Multiplica a quantidade vendida pelo preço de venda.
+
+CustoTotal: Multiplica a quantidade vendida pelo custo médio de aquisição (da subconsulta).
+
+LucroBruto: A diferença entre a receita e o custo.
+
+GROUP BY: Agrupamos os resultados por nome da categoria para consolidar os totais.
+
+ORDER BY: Ordenamos da categoria mais lucrativa para a menos lucrativa.
+*/
+
+/*
+2. Desempenho de Vendedores e Valor Médio por Pedido
+Objetivo: Avaliar o desempenho de cada vendedor não apenas pelo faturamento total, mas também pelo valor médio que conseguem em cada venda. Vendedores com alto ticket médio podem estar aplicando melhores técnicas de venda (upselling/cross-selling).
+
+Consulta SQL:
+
+*/
+SELECT
+    v.nome AS Vendedor,
+    COUNT(p.codPedido) AS TotalPedidos,
+    SUM(p.valorTotal) AS FaturamentoTotal,
+    AVG(p.valorTotal) AS TicketMedio
+FROM Vendedor v
+JOIN Pedido p ON v.CPF = p.CPF_vendedor
+GROUP BY v.CPF, v.nome
+ORDER BY FaturamentoTotal DESC;
+
+// ===============================================================================================================================================================================================
+db.vendedor.aggregate([
+  {
+    // Faz o "join" com pedidos
+    $lookup: {
+      from: "pedido",
+      localField: "_id",         // CPF do vendedor
+      foreignField: "CPF_vendedor",
+      as: "pedidos"
+    }
+  },
+  {
+    // Cria os campos agregados
+    $addFields: {
+      TotalPedidos: { $size: "$pedidos" },
+      FaturamentoTotal: {
+        $sum: "$pedidos.valorTotal"
+      },
+      TicketMedio: {
+        $cond: [
+          { $gt: [{ $size: "$pedidos" }, 0] },
+          { $avg: "$pedidos.valorTotal" },
+          0
+        ]
+      }
+    }
+  },
+  {
+    // Seleciona os campos desejados
+    $project: {
+      _id: 0,
+      Vendedor: "$nome",
+      TotalPedidos: 1,
+      FaturamentoTotal: 1,
+      TicketMedio: 1
+    }
+  },
+  {
+    $sort: { FaturamentoTotal: -1 }
+  }
+]);
+
+// ===============================================================================================================================================================================================
+
+/*
+Como Funciona:
+
+JOIN: Conectamos Vendedor com Pedido para associar cada venda a um vendedor.
+
+GROUP BY: Agrupamos os dados por vendedor (CPF e nome).
+
+Funções de Agregação:
+
+COUNT(p.codPedido): Conta o número de pedidos por vendedor.
+
+SUM(p.valorTotal): Soma o valor de todos os pedidos, gerando o faturamento total.
+
+AVG(p.valorTotal): Calcula o valor médio de cada pedido (ticket médio).
+
+ORDER BY: Classifica os vendedores pelo faturamento total, do maior para o menor.
+*/
+
+
+/*
+4. Análise de Clientes que Compram Itens Promocionais (CONSULTA CORRIGIDA)
+Objetivo: Identificar clientes que demonstram preferência por produtos que costumam ser incluídos em promoções, mesmo que a compra tenha ocorrido fora do período da oferta. Isso ajuda a criar um perfil de cliente sensível a preços para campanhas direcionadas.
+
+Consulta SQL:
+*/
+
+SELECT
+    c.nome AS Cliente,
+    c.email,
+    COUNT(DISTINCT p.idProduto) AS ItensPromocionaisDistintosComprados
+FROM Cliente c
+JOIN Pedido ped ON c.CPF = ped.CPF_cliente
+JOIN Pedido_Produto pp ON ped.codPedido = pp.codPedido
+JOIN Produto p ON pp.idProduto = p.idProduto
+WHERE p.idPromocao IS NOT NULL -- Filtra por produtos que têm alguma promoção associada
+GROUP BY c.CPF, c.nome, c.email
+ORDER BY ItensPromocionaisDistintosComprados DESC;
+
+// ===============================================================================================================================================================================================
+
+db.cliente.aggregate([
+  // JOIN com pedidos
+  {
+    $lookup: {
+      from: "pedido",
+      localField: "_id", // CPF do cliente
+      foreignField: "CPF_cliente",
+      as: "pedidos"
+    }
+  },
+  // Explode os pedidos
+  { $unwind: "$pedidos" },
+  // Explode os itens de cada pedido
+  { $unwind: "$pedidos.itens" },
+  // JOIN com produtos (para verificar promoção)
+  {
+    $lookup: {
+      from: "produto",
+      localField: "pedidos.itens.idProduto",
+      foreignField: "_id",
+      as: "produto"
+    }
+  },
+  { $unwind: "$produto" },
+  // Filtra apenas produtos com promoção
+  {
+    $match: {
+      "produto.promocao": { $ne: null }
+    }
+  },
+  // Agrupa por cliente e coleta os produtos distintos com promoção
+  {
+    $group: {
+      _id: {
+        CPF: "$_id",
+        nome: "$nome",
+        email: "$email"
+      },
+      produtosPromocionais: { $addToSet: "$produto._id" }
+    }
+  },
+  // Conta os produtos distintos comprados com promoção
+  {
+    $project: {
+      _id: 0,
+      Cliente: "$_id.nome",
+      email: "$_id.email",
+      ItensPromocionaisDistintosComprados: { $size: "$produtosPromocionais" }
+    }
+  },
+  // Ordena pela contagem descrescente
+  {
+    $sort: { ItensPromocionaisDistintosComprados: -1 }
+  }
+]);
+
+// ===============================================================================================================================================================================================
+
+/*
+Como Funciona:
+
+JOINs: Unimos as tabelas Cliente, Pedido, Pedido_Produto e Produto para criar uma visão completa de qual cliente comprou qual produto.
+
+Filtro WHERE: A cláusula WHERE p.idPromocao IS NOT NULL é o ponto-chave. Ela filtra os resultados para incluir apenas as linhas de compra onde o produto adquirido tem uma promoção vinculada a ele, independentemente de quando a compra foi feita.
+
+GROUP BY: Agrupamos os resultados por cliente para poder contar quantos itens promocionais diferentes cada um comprou.
+
+ORDER BY: Ordenamos o resultado para mostrar no topo os clientes que compraram a maior variedade de produtos "promocionáveis".
+*/
+
+/*
+3. Análise de Estoque Crítico (Produtos Abaixo do Mínimo)
+Objetivo: Identificar produtos que necessitam de reposição urgente (estoque abaixo do mínimo), excluindo aqueles que estão em uma promoção ativa, pois a alta demanda pode ser temporária.
+
+Consulta SQL:
+*/
+
+SELECT
+    p.idProduto,
+    p.nome,
+    p.qtdEstoque,
+    p.qtdMinima,
+    (p.qtdMinima - p.qtdEstoque) AS UnidadesFaltantes
+FROM Produto p
+WHERE
+    p.qtdEstoque < p.qtdMinima AND
+    p.idProduto NOT IN (
+        -- Subconsulta para encontrar produtos em promoções ativas
+        SELECT p2.idProduto
+        FROM Produto p2
+        JOIN Promocao promo ON p2.idPromocao = promo.ID
+        WHERE CURDATE() BETWEEN promo.dataInicio AND promo.dataTermino
+    );
+
+// ===============================================================================================================================================================================================
+db.produto.aggregate([
+  // 1. Filtra os produtos com estoque abaixo do mínimo
+  {
+    $match: {
+      $expr: { $lt: ["$qtdEstoque", "$qtdMinima"] }
+    }
+  },
+
+  // 2. Filtra produtos SEM promoção ativa
+  {
+    $match: {
+      $or: [
+        { promocao: null },
+        { promocao: { $exists: false } },
+        {
+          $expr: {
+            $not: {
+              $and: [
+                { $gte: [new Date(), { $toDate: "$promocao.dataInicio" }] },
+                { $lte: [new Date(), { $toDate: "$promocao.dataTermino" }] }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+
+  // 3. Calcula unidades faltantes e projeta os campos desejados
+  {
+    $project: {
+      _id: 0,
+      idProduto: "$_id",
+      nome: 1,
+      qtdEstoque: 1,
+      qtdMinima: 1,
+      UnidadesFaltantes: { $subtract: ["$qtdMinima", "$qtdEstoque"] }
+    }
+  }
+])
+
+// ===============================================================================================================================================================================================
+/*
+Como Funciona:
+
+Cláusula WHERE: A condição principal p.qtdEstoque < p.qtdMinima filtra os produtos que precisam de reposição.
+
+Subconsulta (NOT IN): Uma subconsulta cria uma lista de todos os produtos que estão em uma promoção ativa (CURDATE() entre as datas de início e fim). O operador NOT IN exclui esses produtos do resultado final.
+
+Resultado: A lista final mostra apenas os produtos com estoque crítico devido a vendas regulares, e não por picos promocionais, fornecendo um sinal mais preciso para a área de compras.
+*/
+
+/*
+6. Ranking de Produtos Mais Vendidos por Período
+Objetivo: Identificar os produtos mais vendidos (em unidades) dentro de um intervalo de datas específico. Isso é fundamental para entender a demanda, planejar o estoque e direcionar campanhas de marketing.
+
+Consulta SQL:
+*/
+
+SELECT 
+    p.idProduto,
+    p.nome AS produto,
+    SUM(pp.quantidadeProduto) AS total_vendido
+FROM Pedido_Produto pp
+JOIN Pedido pe ON pp.codPedido = pe.codPedido
+JOIN Produto p ON pp.idProduto = p.idProduto
+WHERE pe.data BETWEEN '2025-07-01' AND '2025-07-10' -- Defina aqui o período desejado
+GROUP BY p.idProduto, p.nome
+ORDER BY total_vendido DESC;
+
+// ===============================================================================================================================================================================================
+db.pedido.aggregate([
+  // 1. Filtrar os pedidos pela data
+  {
+    $match: {
+      data: {
+        $gte: "2025-07-01",
+        $lte: "2025-07-10"
+      }
+    }
+  },
+
+  // 2. "Explodir" os itens do pedido
+  {
+    $unwind: "$itens"
+  },
+
+  // 3. Juntar com a collection produto
+  {
+    $lookup: {
+      from: "produto",
+      localField: "itens.idProduto",
+      foreignField: "_id",
+      as: "produtoInfo"
+    }
+  },
+
+  // 4. Transformar produtoInfo de array para objeto
+  {
+    $unwind: "$produtoInfo"
+  },
+
+  // 5. Agrupar pelo idProduto e nome, somando as quantidades
+  {
+    $group: {
+      _id: {
+        idProduto: "$itens.idProduto",
+        nome: "$produtoInfo.nome"
+      },
+      total_vendido: { $sum: "$itens.quantidade" }
+    }
+  },
+
+  // 6. Projetar os campos no formato desejado
+  {
+    $project: {
+      _id: 0,
+      idProduto: "$_id.idProduto",
+      produto: "$_id.nome",
+      total_vendido: 1
+    }
+  },
+
+  // 7. Ordenar por total vendido desc
+  {
+    $sort: { total_vendido: -1 }
+  }
+])
+
+// ===============================================================================================================================================================================================
+
+/*
+Como Funciona:
+
+JOINs: As tabelas Pedido_Produto, Pedido e Produto são unidas para conectar a quantidade vendida de cada item com a data do pedido e o nome do produto.
+
+Cláusula WHERE: Filtra os pedidos para incluir apenas aqueles realizados dentro do intervalo de datas especificado.
+
+SUM e GROUP BY: A função SUM(pp.quantidadeProduto) calcula o total de unidades vendidas para cada produto. O GROUP BY garante que a soma seja feita por produto.
+
+ORDER BY: Organiza o resultado em ordem decrescente, mostrando os produtos mais vendidos no topo da lista.
+
+*/

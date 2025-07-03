@@ -1,0 +1,357 @@
+JSON
+{
+    "_id": 1,
+    "data": "2025-07-01",
+    "itens": [
+        {
+            "idProduto": 1,
+            "quantidade": 2,
+            "precoUnitario": 29.90
+        }
+    ],
+    "valorTotal": 59.80,
+    "CPF_cliente": "12345678901",
+    "CPF_vendedor": "11122233344"
+},
+{
+    "_id": 2,
+    "data": "2025-07-02",
+    "itens": [
+        {
+            "idProduto": 2,
+            "quantidade": 1,
+            "precoUnitario": 49.90
+        }
+    ],
+    "valorTotal": 49.90,
+    "CPF_cliente": "98765432100",
+    "CPF_vendedor": "22233344455"
+},
+{
+    "_id": 3,
+    "data": "2025-07-03",
+    "itens": [
+        {
+            "idProduto": 3,
+            "quantidade": 1,
+            "precoUnitario": 89.90
+        }
+    ],
+    "valorTotal": 89.90,
+    "CPF_cliente": "11111111111",
+    "CPF_vendedor": "33344455566"
+},
+{
+    "_id": 4,
+    "data": "2025-07-04",
+    "itens": [
+        {
+            "idProduto": 4,
+            "quantidade": 2,
+            "precoUnitario": 19.90
+        }
+    ],
+    "valorTotal": 39.80,
+    "CPF_cliente": "22222222222",
+    "CPF_vendedor": "44455566677"
+},
+{
+    "_id": 5,
+    "data": "2025-07-05",
+    "itens": [
+        {
+            "idProduto": 5,
+            "quantidade": 3,
+            "precoUnitario": 39.90
+        }
+    ],
+    "valorTotal": 119.80,
+    "CPF_cliente": "33333333333",
+    "CPF_vendedor": "55566677788"
+},
+{
+    "_id": 6,
+    "data": "2025-07-06",
+    "itens": [
+        {
+            "idProduto": 6,
+            "quantidade": 2,
+            "precoUnitario": 29.95
+        }
+    ],
+    "valorTotal": 59.90,
+    "CPF_cliente": "44444444444",
+    "CPF_vendedor": "66677788899"
+},
+{
+    "_id": 7,
+    "data": "2025-07-07",
+    "itens": [
+        {
+            "idProduto": 7,
+            "quantidade": 1,
+            "precoUnitario": 59.90
+        }
+    ],
+    "valorTotal": 75.00,
+    "CPF_cliente": "55555555555",
+    "CPF_vendedor": "77788899900"
+},
+{
+    "_id": 8,
+    "data": "2025-07-08",
+    "itens": [
+        {
+            "idProduto": 8,
+            "quantidade": 1,
+            "precoUnitario": 99.90
+        }
+    ],
+    "valorTotal": 89.90,
+    "CPF_cliente": "66666666666",
+    "CPF_vendedor": "88899900011"
+},
+{
+    "_id": 9,
+    "data": "2025-07-09",
+    "itens": [
+        {
+            "idProduto": 9,
+            "quantidade": 2,
+            "precoUnitario": 9.90
+        }
+    ],
+    "valorTotal": 129.80,
+    "CPF_cliente": "77777777777",
+    "CPF_vendedor": "99900011122"
+},
+{
+    "_id": 10,
+    "data": "2025-07-10",
+    "itens": [
+        {
+            "idProduto": 10,
+            "quantidade": 1,
+            "precoUnitario": 89.90
+        }
+    ],
+    "valorTotal": 49.90,
+    "CPF_cliente": "88888888888",
+    "CPF_vendedor": "00011122233"
+},
+{
+    "_id": 11,
+    "data": "2025-07-02",
+    "itens": [
+        {
+            "idProduto": 1,
+            "quantidade": 5,
+            "precoUnitario": 29.90
+        },
+        {
+            "idProduto": 2,
+            "quantidade": 3,
+            "precoUnitario": 49.90
+        },
+        {
+            "idProduto": 3,
+            "quantidade": 1,
+            "precoUnitario": 89.90
+        }
+    ],
+    "valorTotal": 349.50,
+    "CPF_cliente": "01234567890",
+    "CPF_vendedor": "11122233344"
+},
+{
+    "_id": 12,
+    "data": "2023-01-15",
+    "itens": [
+        {
+            "idProduto": 1,
+            "quantidade": 3,
+            "precoUnitario": 29.90
+        },
+        {
+            "idProduto": 5,
+            "quantidade": 2,
+            "precoUnitario": 39.90
+        }
+    ],
+    "valorTotal": 150.00,
+    "CPF_cliente": "12345678901",
+    "CPF_vendedor": "11122233344"
+},
+{
+    "_id": 13,
+    "data": "2023-02-20",
+    "itens": [
+        {
+            "idProduto": 2,
+            "quantidade": 1,
+            "precoUnitario": 49.90
+        }
+    ],
+    "valorTotal": 75.50,
+    "CPF_cliente": "98765432100",
+    "CPF_vendedor": "22233344455"
+},
+{
+    "_id": 14,
+    "data": "2023-03-01",
+    "itens": [
+        {
+            "idProduto": 3,
+            "quantidade": 1,
+            "precoUnitario": 89.90
+        },
+        {
+            "idProduto": 4,
+            "quantidade": 2,
+            "precoUnitario": 19.90
+        }
+    ],
+    "valorTotal": 200.00,
+    "CPF_cliente": "11111111111",
+    "CPF_vendedor": "11122233344"
+},
+{
+    "_id": 15,
+    "data": "2023-04-10",
+    "itens": [
+        {
+            "idProduto": 5,
+            "quantidade": 1,
+            "precoUnitario": 39.90
+        }
+    ],
+    "valorTotal": 90.00,
+    "CPF_cliente": "22222222222",
+    "CPF_vendedor": "33344455566"
+},
+{
+    "_id": 16,
+    "data": "2023-05-05",
+    "itens": [
+        {
+            "idProduto": 6,
+            "quantidade": 2,
+            "precoUnitario": 15.90
+        }
+    ],
+    "valorTotal": 120.00,
+    "CPF_cliente": "33333333333",
+    "CPF_vendedor": "44455566677"
+},
+{
+    "_id": 17,
+    "data": "2023-06-25",
+    "itens": [
+        {
+            "idProduto": 7,
+            "quantidade": 1,
+            "precoUnitario": 59.90
+        }
+    ],
+    "valorTotal": 65.00,
+    "CPF_cliente": "44444444444",
+    "CPF_vendedor": "55566677788"
+},
+{
+    "_id": 18,
+    "data": "2023-07-12",
+    "itens": [
+        {
+            "idProduto": 8,
+            "quantidade": 1,
+            "precoUnitario": 99.90
+        }
+    ],
+    "valorTotal": 180.00,
+    "CPF_cliente": "55555555555",
+    "CPF_vendedor": "66677788899"
+},
+{
+    "_id": 19,
+    "data": "2023-08-01",
+    "itens": [
+        {
+            "idProduto": 9,
+            "quantidade": 3,
+            "precoUnitario": 9.90
+        }
+    ],
+    "valorTotal": 40.00,
+    "CPF_cliente": "66666666666",
+    "CPF_vendedor": "77788899900"
+},
+{
+    "_id": 20,
+    "data": "2023-09-18",
+    "itens": [
+        {
+            "idProduto": 10,
+            "quantidade": 1,
+            "precoUnitario": 89.90
+        }
+    ],
+    "valorTotal": 110.00,
+    "CPF_cliente": "77777777777",
+    "CPF_vendedor": "88899900011"
+},
+{
+    "_id": 21,
+    "data": "2023-10-03",
+    "itens": [
+        {
+            "idProduto": 1,
+            "quantidade": 5,
+            "precoUnitario": 29.90
+        }
+    ],
+    "valorTotal": 250.00,
+    "CPF_cliente": "88888888888",
+    "CPF_vendedor": "99900011122"
+},
+{
+    "_id": 22,
+    "data": "2023-06-20",
+    "itens": [
+        {
+            "idProduto": 11,
+            "quantidade": 2,
+            "precoUnitario": 39.90
+        }
+    ],
+    "valorTotal": 89.90,
+    "CPF_cliente": "11111111111",
+    "CPF_vendedor": "11122233344"
+},
+{
+    "_id": 23,
+    "data": "2023-11-05",
+    "itens": [
+        {
+            "idProduto": 12,
+            "quantidade": 1,
+            "precoUnitario": 79.90
+        }
+    ],
+    "valorTotal": 75.00,
+    "CPF_cliente": "22222222222",
+    "CPF_vendedor": "11122233344"
+},
+{
+    "_id": 24,
+    "data": "2023-03-15",
+    "itens": [
+        {
+            "idProduto": 13,
+            "quantidade": 1,
+            "precoUnitario": 25.00
+        }
+    ],
+    "valorTotal": 139.80,
+    "CPF_cliente": "22222222222",
+    "CPF_vendedor": "11122233344"
+}

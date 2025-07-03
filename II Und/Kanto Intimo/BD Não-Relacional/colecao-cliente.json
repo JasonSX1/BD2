@@ -1,0 +1,277 @@
+// COLECAO CLIENTE
+// ===================
+// Banco de Dados Kanto Intimo
+// ===================
+// Cria o banco de dados Kanto Intimo
+use kantointimo
+
+// Exclui banco de dados selecionado
+// db.dropDatabase();
+// Exclui a coleção
+db.cliente.drop();
+// Remove todos os documentos da coleção
+// db.cliente.remove({});
+// Insere vários documentos na coleção
+db.cliente.insertMany([
+{
+        "_id": "01234567890",
+        "nome": "Novo Cliente Teste",
+        "email": "novo.teste@email.com",
+        "dataNasc": "1990-01-01",
+        "endereco": {
+            "UF": "SP",
+            "CEP": "12345678",
+            "bairro": "Centro",
+            "cidade": "São Paulo",
+            "numero": "123",
+            "logradouro": "Rua das Flores"
+        },
+        "telefones": [
+            {
+                "numero": "11999999980"
+            }
+        ]
+    },
+    {
+        "_id": "11111111111",
+        "nome": "Carlos Andrade",
+        "email": "carlos@email.com",
+        "dataNasc": "1992-02-10",
+        "endereco": {
+            "UF": "BA",
+            "CEP": "11111111",
+            "bairro": "Bairro A",
+            "cidade": "Salvador",
+            "numero": "1",
+            "logradouro": "Rua A"
+        },
+        "telefones": [
+            {
+                "numero": "11999999993"
+            }
+        ]
+    },
+    {
+        "_id": "11111111112",
+        "nome": "Ana Souza",
+        "email": "ana@email.com",
+        "dataNasc": "1990-05-20",
+        "endereco": {
+            "UF": "BA",
+            "CEP": "40000000",
+            "bairro": "Pituba",
+            "cidade": "Salvador",
+            "numero": "321",
+            "logradouro": "Rua do Sol"
+        },
+        "telefones": [
+            {
+                "numero": null
+            }
+        ]
+    },
+    {
+        "_id": "12345678901",
+        "nome": "João Silva",
+        "email": "joao@email.com",
+        "dataNasc": "1990-05-15",
+        "endereco": {
+            "UF": "SP",
+            "CEP": "12345678",
+            "bairro": "Centro",
+            "cidade": "São Paulo",
+            "numero": "123",
+            "logradouro": "Rua das Flores"
+        },
+        "telefones": [
+            {
+                "numero": "11999999991"
+            },
+            {
+                "numero": "77999999999"
+            }
+        ]
+    },
+    {
+        "_id": "22222222222",
+        "nome": "Ana Paula",
+        "email": "ana@email.com",
+        "dataNasc": "1980-11-30",
+        "endereco": {
+            "UF": "CE",
+            "CEP": "22222222",
+            "bairro": "Bairro B",
+            "cidade": "Fortaleza",
+            "numero": "2",
+            "logradouro": "Rua B"
+        },
+        "telefones": [
+            {
+                "numero": "11999999994"
+            }
+        ]
+    },
+    {
+        "_id": "22222222224",
+        "nome": "João Pedro",
+        "email": "joao@email.com",
+        "dataNasc": "1988-09-15",
+        "endereco": {
+            "UF": "RJ",
+            "CEP": "20000000",
+            "bairro": "Copacabana",
+            "cidade": "Rio de Janeiro",
+            "numero": "55",
+            "logradouro": "Av Atlântica"
+        },
+        "telefones": [
+            {
+                "numero": null
+            }
+        ]
+    },
+    {
+        "_id": "33333333333",
+        "nome": "Bruno Costa",
+        "email": "bruno@email.com",
+        "dataNasc": "1975-07-18",
+        "endereco": {
+            "UF": "MG",
+            "CEP": "33333333",
+            "bairro": "Bairro C",
+            "cidade": "Belo Horizonte",
+            "numero": "3",
+            "logradouro": "Rua C"
+        },
+        "telefones": [
+            {
+                "numero": "11999999995"
+            }
+        ]
+    },
+    {
+        "_id": "44444444444",
+        "nome": "Lucia Alves",
+        "email": "lucia@email.com",
+        "dataNasc": "1999-09-09",
+        "endereco": {
+            "UF": "RS",
+            "CEP": "44444444",
+            "bairro": "Bairro D",
+            "cidade": "Porto Alegre",
+            "numero": "4",
+            "logradouro": "Rua D"
+        },
+        "telefones": [
+            {
+                "numero": "11999999996"
+            }
+        ]
+    },
+    {
+        "_id": "55555555555",
+        "nome": "Pedro Rocha",
+        "email": "pedro@email.com",
+        "dataNasc": "2000-01-01",
+        "endereco": {
+            "UF": "PR",
+            "CEP": "55555555",
+            "bairro": "Bairro E",
+            "cidade": "Curitiba",
+            "numero": "5",
+            "logradouro": "Rua E"
+        },
+        "telefones": [
+            {
+                "numero": "11999999997"
+            }
+        ]
+    },
+    {
+        "_id": "66666666666",
+        "nome": "Sofia Martins",
+        "email": "sofia@email.com",
+        "dataNasc": "1994-03-03",
+        "endereco": {
+            "UF": "SC",
+            "CEP": "66666666",
+            "bairro": "Bairro F",
+            "cidade": "Florianópolis",
+            "numero": "6",
+            "logradouro": "Rua F"
+        },
+        "telefones": [
+            {
+                "numero": "11999999998"
+            }
+        ]
+    },
+    {
+        "_id": "77777777777",
+        "nome": "Marcos Lima",
+        "email": "marcos@email.com",
+        "dataNasc": "1988-12-12",
+        "endereco": {
+            "UF": "AM",
+            "CEP": "77777777",
+            "bairro": "Bairro G",
+            "cidade": "Manaus",
+            "numero": "7",
+            "logradouro": "Rua G"
+        },
+        "telefones": [
+            {
+                "numero": "11999999999"
+            }
+        ]
+    },
+    {
+        "_id": "88888888888",
+        "nome": "Juliana Faria",
+        "email": "juliana@email.com",
+        "dataNasc": "1991-06-06",
+        "endereco": {
+            "UF": "PA",
+            "CEP": "88888888",
+            "bairro": "Bairro H",
+            "cidade": "Belém",
+            "numero": "8",
+            "logradouro": "Rua H"
+        },
+        "telefones": [
+            {
+                "numero": "11999999990"
+            }
+        ]
+    },
+    {
+        "_id": "98765432100",
+        "nome": "Maria Souza",
+        "email": "maria@email.com",
+        "dataNasc": "1985-08-22",
+        "endereco": {
+            "UF": "RJ",
+            "CEP": "87654321",
+            "bairro": "Jardins",
+            "cidade": "Rio de Janeiro",
+            "numero": "456",
+            "logradouro": "Av. Brasil"
+        },
+        "telefones": [
+            {
+                "numero": "11999999992"
+            }
+        ]
+    }
+]);
+
+// Mostra as coleções criadas
+show collections
+
+// Mostra todos os banco de dados criados
+// show dbs
+show databases
+
+// Consulta todos os documentos da coleção cliente
+db.cliente.find().pretty()
+
