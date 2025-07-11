@@ -13,7 +13,7 @@ db.cliente.drop();
 // db.cliente.remove({});
 // Insere vários documentos na coleção
 db.cliente.insertMany([
-{
+    {
         "_id": "01234567890",
         "nome": "Novo Cliente Teste",
         "email": "novo.teste@email.com",
@@ -26,13 +26,9 @@ db.cliente.insertMany([
             "numero": "123",
             "logradouro": "Rua das Flores"
         },
-        "telefones": [
-            {
-                "numero": "11999999980"
-            }
-        ]
+        "telefones": ["11999999980"]
     },
-    {
+{
         "_id": "11111111111",
         "nome": "Carlos Andrade",
         "email": "carlos@email.com",
@@ -46,12 +42,10 @@ db.cliente.insertMany([
             "logradouro": "Rua A"
         },
         "telefones": [
-            {
-                "numero": "11999999993"
-            }
+            "11999999993"
         ]
     },
-    {
+{
         "_id": "11111111112",
         "nome": "Ana Souza",
         "email": "ana@email.com",
@@ -65,12 +59,10 @@ db.cliente.insertMany([
             "logradouro": "Rua do Sol"
         },
         "telefones": [
-            {
-                "numero": null
-            }
+            null
         ]
     },
-    {
+{
         "_id": "12345678901",
         "nome": "João Silva",
         "email": "joao@email.com",
@@ -84,15 +76,11 @@ db.cliente.insertMany([
             "logradouro": "Rua das Flores"
         },
         "telefones": [
-            {
-                "numero": "11999999991"
-            },
-            {
-                "numero": "77999999999"
-            }
+            "11999999991",
+            "77999999999"
         ]
     },
-    {
+{
         "_id": "22222222222",
         "nome": "Ana Paula",
         "email": "ana@email.com",
@@ -106,12 +94,10 @@ db.cliente.insertMany([
             "logradouro": "Rua B"
         },
         "telefones": [
-            {
-                "numero": "11999999994"
-            }
+            "11999999994"
         ]
     },
-    {
+{
         "_id": "22222222224",
         "nome": "João Pedro",
         "email": "joao@email.com",
@@ -125,12 +111,10 @@ db.cliente.insertMany([
             "logradouro": "Av Atlântica"
         },
         "telefones": [
-            {
-                "numero": null
-            }
+            null
         ]
     },
-    {
+{
         "_id": "33333333333",
         "nome": "Bruno Costa",
         "email": "bruno@email.com",
@@ -144,12 +128,10 @@ db.cliente.insertMany([
             "logradouro": "Rua C"
         },
         "telefones": [
-            {
-                "numero": "11999999995"
-            }
+            "11999999995"
         ]
     },
-    {
+{
         "_id": "44444444444",
         "nome": "Lucia Alves",
         "email": "lucia@email.com",
@@ -163,12 +145,10 @@ db.cliente.insertMany([
             "logradouro": "Rua D"
         },
         "telefones": [
-            {
-                "numero": "11999999996"
-            }
+            "11999999996"
         ]
     },
-    {
+{
         "_id": "55555555555",
         "nome": "Pedro Rocha",
         "email": "pedro@email.com",
@@ -182,12 +162,10 @@ db.cliente.insertMany([
             "logradouro": "Rua E"
         },
         "telefones": [
-            {
-                "numero": "11999999997"
-            }
+            "11999999997"
         ]
     },
-    {
+{
         "_id": "66666666666",
         "nome": "Sofia Martins",
         "email": "sofia@email.com",
@@ -201,12 +179,10 @@ db.cliente.insertMany([
             "logradouro": "Rua F"
         },
         "telefones": [
-            {
-                "numero": "11999999998"
-            }
+            "11999999998"
         ]
     },
-    {
+{
         "_id": "77777777777",
         "nome": "Marcos Lima",
         "email": "marcos@email.com",
@@ -220,12 +196,10 @@ db.cliente.insertMany([
             "logradouro": "Rua G"
         },
         "telefones": [
-            {
-                "numero": "11999999999"
-            }
+            "11999999999"
         ]
     },
-    {
+{
         "_id": "88888888888",
         "nome": "Juliana Faria",
         "email": "juliana@email.com",
@@ -239,12 +213,10 @@ db.cliente.insertMany([
             "logradouro": "Rua H"
         },
         "telefones": [
-            {
-                "numero": "11999999990"
-            }
+            "11999999990"
         ]
     },
-    {
+{
         "_id": "98765432100",
         "nome": "Maria Souza",
         "email": "maria@email.com",
@@ -258,9 +230,7 @@ db.cliente.insertMany([
             "logradouro": "Av. Brasil"
         },
         "telefones": [
-            {
-                "numero": "11999999992"
-            }
+            "11999999992"
         ]
     }
 ]);

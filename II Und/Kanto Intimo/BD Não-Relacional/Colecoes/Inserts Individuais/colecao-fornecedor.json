@@ -13,7 +13,7 @@ db.fornecedor.drop();
 // db.fornecedor.remove({});
 // Insere vários documentos na coleção
 db.fornecedor.insertMany([
-{
+    {
         "_id": "12345678000199",
         "nome": "Fornecedor A",
         "email": "fornecedorA@email.com",
@@ -26,9 +26,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua das Flores"
         },
         "telefones": [
-            {
-                "numero": "1133330001"
-            }
+            "1133330001"
         ],
         "produtos_fornecidos": [
             {
@@ -57,11 +55,7 @@ db.fornecedor.insertMany([
             "numero": "456",
             "logradouro": "Av. Brasil"
         },
-        "telefones": [
-            {
-                "numero": "1133330002"
-            }
-        ],
+        "telefones": ["1133330002"],
         "produtos_fornecidos": [
             {
                 "data": "2025-06-02",
@@ -90,9 +84,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua A"
         },
         "telefones": [
-            {
-                "numero": "1133330003"
-            }
+            "1133330003"
         ],
         "produtos_fornecidos": [
             {
@@ -122,9 +114,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua B"
         },
         "telefones": [
-            {
-                "numero": "1133330004"
-            }
+            "1133330004"
         ],
         "produtos_fornecidos": [
             {
@@ -154,9 +144,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua C"
         },
         "telefones": [
-            {
-                "numero": "1133330005"
-            }
+            "1133330005"
         ],
         "produtos_fornecidos": [
             {
@@ -186,9 +174,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua D"
         },
         "telefones": [
-            {
-                "numero": "1133330006"
-            }
+            "1133330006"
         ],
         "produtos_fornecidos": [
             {
@@ -218,9 +204,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua E"
         },
         "telefones": [
-            {
-                "numero": "1133330007"
-            }
+            "1133330007"
         ],
         "produtos_fornecidos": [
             {
@@ -244,9 +228,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua F"
         },
         "telefones": [
-            {
-                "numero": "1133330008"
-            }
+            "1133330008"
         ],
         "produtos_fornecidos": [
             {
@@ -270,9 +252,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua G"
         },
         "telefones": [
-            {
-                "numero": "1133330009"
-            }
+            "1133330009"
         ],
         "produtos_fornecidos": [
             {
@@ -296,9 +276,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua H"
         },
         "telefones": [
-            {
-                "numero": "1133330010"
-            }
+            "1133330010"
         ],
         "produtos_fornecidos": [
             {
@@ -310,7 +288,6 @@ db.fornecedor.insertMany([
         ]
     }
 ]);
-
 
 // Mostra as coleções criadas
 show collections

@@ -9,10 +9,54 @@ db.cliente.drop();
 db.fornecedor.drop();
 db.pedido.drop();
 db.produto.drop();
-db.pvendedor.drop();
+db.vendedor.drop();
+db.categoria.drop()
+
+db.categoria.insertMany([
+    {
+        "_id": 1,
+        "nome": "Lingerie"
+    },
+    {
+        "_id": 2,
+        "nome": "Pijamas"
+    },
+    {
+        "_id": 3,
+        "nome": "Camisolas"
+    },
+    {
+        "_id": 4,
+        "nome": "Boxers"
+    },
+    {
+        "_id": 5,
+        "nome": "Sutiãs"
+    },
+    {
+        "_id": 6,
+        "nome": "Cuecas"
+    },
+    {
+        "_id": 7,
+        "nome": "Robes"
+    },
+    {
+        "_id": 8,
+        "nome": "Conjuntos"
+    },
+    {
+        "_id": 9,
+        "nome": "Meias"
+    },
+    {
+        "_id": 10,
+        "nome": "Acessórios"
+    }
+]);
 
 db.cliente.insertMany([
-{
+    {
         "_id": "01234567890",
         "nome": "Novo Cliente Teste",
         "email": "novo.teste@email.com",
@@ -26,12 +70,10 @@ db.cliente.insertMany([
             "logradouro": "Rua das Flores"
         },
         "telefones": [
-            {
-                "numero": "11999999980"
-            }
+            "11999999980"
         ]
     },
-    {
+{
         "_id": "11111111111",
         "nome": "Carlos Andrade",
         "email": "carlos@email.com",
@@ -45,12 +87,10 @@ db.cliente.insertMany([
             "logradouro": "Rua A"
         },
         "telefones": [
-            {
-                "numero": "11999999993"
-            }
+            "11999999993"
         ]
     },
-    {
+{
         "_id": "11111111112",
         "nome": "Ana Souza",
         "email": "ana@email.com",
@@ -64,12 +104,10 @@ db.cliente.insertMany([
             "logradouro": "Rua do Sol"
         },
         "telefones": [
-            {
-                "numero": null
-            }
+            null
         ]
     },
-    {
+{
         "_id": "12345678901",
         "nome": "João Silva",
         "email": "joao@email.com",
@@ -83,15 +121,11 @@ db.cliente.insertMany([
             "logradouro": "Rua das Flores"
         },
         "telefones": [
-            {
-                "numero": "11999999991"
-            },
-            {
-                "numero": "77999999999"
-            }
+            "11999999991",
+            "77999999999"
         ]
     },
-    {
+{
         "_id": "22222222222",
         "nome": "Ana Paula",
         "email": "ana@email.com",
@@ -105,12 +139,10 @@ db.cliente.insertMany([
             "logradouro": "Rua B"
         },
         "telefones": [
-            {
-                "numero": "11999999994"
-            }
+            "11999999994"
         ]
     },
-    {
+{
         "_id": "22222222224",
         "nome": "João Pedro",
         "email": "joao@email.com",
@@ -124,12 +156,10 @@ db.cliente.insertMany([
             "logradouro": "Av Atlântica"
         },
         "telefones": [
-            {
-                "numero": null
-            }
+            null
         ]
     },
-    {
+{
         "_id": "33333333333",
         "nome": "Bruno Costa",
         "email": "bruno@email.com",
@@ -143,12 +173,10 @@ db.cliente.insertMany([
             "logradouro": "Rua C"
         },
         "telefones": [
-            {
-                "numero": "11999999995"
-            }
+            "11999999995"
         ]
     },
-    {
+{
         "_id": "44444444444",
         "nome": "Lucia Alves",
         "email": "lucia@email.com",
@@ -162,12 +190,10 @@ db.cliente.insertMany([
             "logradouro": "Rua D"
         },
         "telefones": [
-            {
-                "numero": "11999999996"
-            }
+            "11999999996"
         ]
     },
-    {
+{
         "_id": "55555555555",
         "nome": "Pedro Rocha",
         "email": "pedro@email.com",
@@ -181,12 +207,10 @@ db.cliente.insertMany([
             "logradouro": "Rua E"
         },
         "telefones": [
-            {
-                "numero": "11999999997"
-            }
+            "11999999997"
         ]
     },
-    {
+{
         "_id": "66666666666",
         "nome": "Sofia Martins",
         "email": "sofia@email.com",
@@ -200,12 +224,10 @@ db.cliente.insertMany([
             "logradouro": "Rua F"
         },
         "telefones": [
-            {
-                "numero": "11999999998"
-            }
+            "11999999998"
         ]
     },
-    {
+{
         "_id": "77777777777",
         "nome": "Marcos Lima",
         "email": "marcos@email.com",
@@ -219,12 +241,10 @@ db.cliente.insertMany([
             "logradouro": "Rua G"
         },
         "telefones": [
-            {
-                "numero": "11999999999"
-            }
+            "11999999999"
         ]
     },
-    {
+{
         "_id": "88888888888",
         "nome": "Juliana Faria",
         "email": "juliana@email.com",
@@ -238,12 +258,10 @@ db.cliente.insertMany([
             "logradouro": "Rua H"
         },
         "telefones": [
-            {
-                "numero": "11999999990"
-            }
+            "11999999990"
         ]
     },
-    {
+{
         "_id": "98765432100",
         "nome": "Maria Souza",
         "email": "maria@email.com",
@@ -257,15 +275,13 @@ db.cliente.insertMany([
             "logradouro": "Av. Brasil"
         },
         "telefones": [
-            {
-                "numero": "11999999992"
-            }
+            "11999999992"
         ]
     }
 ]);
 
 db.fornecedor.insertMany([
-{
+    {
         "_id": "12345678000199",
         "nome": "Fornecedor A",
         "email": "fornecedorA@email.com",
@@ -278,9 +294,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua das Flores"
         },
         "telefones": [
-            {
-                "numero": "1133330001"
-            }
+            "1133330001"
         ],
         "produtos_fornecidos": [
             {
@@ -310,9 +324,7 @@ db.fornecedor.insertMany([
             "logradouro": "Av. Brasil"
         },
         "telefones": [
-            {
-                "numero": "1133330002"
-            }
+            "1133330002"
         ],
         "produtos_fornecidos": [
             {
@@ -342,9 +354,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua A"
         },
         "telefones": [
-            {
-                "numero": "1133330003"
-            }
+            "1133330003"
         ],
         "produtos_fornecidos": [
             {
@@ -374,9 +384,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua B"
         },
         "telefones": [
-            {
-                "numero": "1133330004"
-            }
+            "1133330004"
         ],
         "produtos_fornecidos": [
             {
@@ -406,9 +414,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua C"
         },
         "telefones": [
-            {
-                "numero": "1133330005"
-            }
+            "1133330005"
         ],
         "produtos_fornecidos": [
             {
@@ -438,9 +444,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua D"
         },
         "telefones": [
-            {
-                "numero": "1133330006"
-            }
+            "1133330006"
         ],
         "produtos_fornecidos": [
             {
@@ -470,9 +474,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua E"
         },
         "telefones": [
-            {
-                "numero": "1133330007"
-            }
+            "1133330007"
         ],
         "produtos_fornecidos": [
             {
@@ -496,9 +498,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua F"
         },
         "telefones": [
-            {
-                "numero": "1133330008"
-            }
+            "1133330008"
         ],
         "produtos_fornecidos": [
             {
@@ -522,9 +522,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua G"
         },
         "telefones": [
-            {
-                "numero": "1133330009"
-            }
+            "1133330009"
         ],
         "produtos_fornecidos": [
             {
@@ -548,9 +546,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua H"
         },
         "telefones": [
-            {
-                "numero": "1133330010"
-            }
+            "1133330010"
         ],
         "produtos_fornecidos": [
             {
@@ -923,7 +919,7 @@ db.pedido.insertMany([
 ]);
 
 db.produto.insertMany([
-{
+    {
         "_id": 1,
         "cor": "Vermelho",
         "nome": "Calcinha Renda",
@@ -936,12 +932,9 @@ db.produto.insertMany([
             "dataTermino": "2025-01-31",
             "percentualDesconto": 0.10
         },
-        "categoria": {
-            "id": 1,
-            "nome": "Lingerie"
-        },
         "qtdMinima": 10,
-        "qtdEstoque": 50
+        "qtdEstoque": 50,
+        "idCategoria": 1
     },
     {
         "_id": 2,
@@ -956,12 +949,9 @@ db.produto.insertMany([
             "dataTermino": "2025-06-30",
             "percentualDesconto": 0.15
         },
-        "categoria": {
-            "id": 2,
-            "nome": "Pijamas"
-        },
         "qtdMinima": 5,
-        "qtdEstoque": 30
+        "qtdEstoque": 30,
+        "idCategoria": 2
     },
     {
         "_id": 3,
@@ -976,12 +966,9 @@ db.produto.insertMany([
             "dataTermino": "2025-11-28",
             "percentualDesconto": 0.30
         },
-        "categoria": {
-            "id": 3,
-            "nome": "Camisolas"
-        },
         "qtdMinima": 3,
-        "qtdEstoque": 20
+        "qtdEstoque": 20,
+        "idCategoria": 3
     },
     {
         "_id": 4,
@@ -996,12 +983,9 @@ db.produto.insertMany([
             "dataTermino": "2025-12-25",
             "percentualDesconto": 0.25
         },
-        "categoria": {
-            "id": 4,
-            "nome": "Boxers"
-        },
         "qtdMinima": 20,
-        "qtdEstoque": 100
+        "qtdEstoque": 100,
+        "idCategoria": 4
     },
     {
         "_id": 5,
@@ -1016,12 +1000,9 @@ db.produto.insertMany([
             "dataTermino": "2025-10-31",
             "percentualDesconto": 0.20
         },
-        "categoria": {
-            "id": 5,
-            "nome": "Sutiãs"
-        },
         "qtdMinima": 8,
-        "qtdEstoque": 40
+        "qtdEstoque": 40,
+        "idCategoria": 5
     },
     {
         "_id": 6,
@@ -1036,12 +1017,9 @@ db.produto.insertMany([
             "dataTermino": "2025-01-15",
             "percentualDesconto": 0.05
         },
-        "categoria": {
-            "id": 6,
-            "nome": "Cuecas"
-        },
         "qtdMinima": 15,
-        "qtdEstoque": 80
+        "qtdEstoque": 80,
+        "idCategoria": 6
     },
     {
         "_id": 7,
@@ -1056,12 +1034,9 @@ db.produto.insertMany([
             "dataTermino": "2025-03-05",
             "percentualDesconto": 0.40
         },
-        "categoria": {
-            "id": 7,
-            "nome": "Robes"
-        },
         "qtdMinima": 4,
-        "qtdEstoque": 15
+        "qtdEstoque": 15,
+        "idCategoria": 7
     },
     {
         "_id": 8,
@@ -1076,12 +1051,9 @@ db.produto.insertMany([
             "dataTermino": "2025-09-20",
             "percentualDesconto": 0.18
         },
-        "categoria": {
-            "id": 8,
-            "nome": "Conjuntos"
-        },
         "qtdMinima": 3,
-        "qtdEstoque": 12
+        "qtdEstoque": 12,
+        "idCategoria": 8
     },
     {
         "_id": 9,
@@ -1096,12 +1068,9 @@ db.produto.insertMany([
             "dataTermino": "2025-05-10",
             "percentualDesconto": 0.22
         },
-        "categoria": {
-            "id": 9,
-            "nome": "Meias"
-        },
         "qtdMinima": 10,
-        "qtdEstoque": 60
+        "qtdEstoque": 60,
+        "idCategoria": 9
     },
     {
         "_id": 10,
@@ -1116,12 +1085,9 @@ db.produto.insertMany([
             "dataTermino": "2025-02-10",
             "percentualDesconto": 0.08
         },
-        "categoria": {
-            "id": 10,
-            "nome": "Acessórios"
-        },
         "qtdMinima": 2,
-        "qtdEstoque": 10
+        "qtdEstoque": 10,
+        "idCategoria": 10
     },
     {
         "_id": 11,
@@ -1136,12 +1102,9 @@ db.produto.insertMany([
             "dataTermino": "2025-12-31",
             "percentualDesconto": 0.15
         },
-        "categoria": {
-            "id": 5,
-            "nome": "Sutiãs"
-        },
         "qtdMinima": 10,
-        "qtdEstoque": 20
+        "qtdEstoque": 20,
+        "idCategoria": 5
     },
     {
         "_id": 12,
@@ -1156,12 +1119,9 @@ db.produto.insertMany([
             "dataTermino": "2025-12-31",
             "percentualDesconto": 0.15
         },
-        "categoria": {
-            "id": 2,
-            "nome": "Pijamas"
-        },
         "qtdMinima": 5,
-        "qtdEstoque": 15
+        "qtdEstoque": 15,
+        "idCategoria": 2
     },
     {
         "_id": 13,
@@ -1176,12 +1136,9 @@ db.produto.insertMany([
             "dataTermino": "2025-11-28",
             "percentualDesconto": 0.30
         },
-        "categoria": {
-            "id": 4,
-            "nome": "Boxers"
-        },
         "qtdMinima": 25,
-        "qtdEstoque": 35
+        "qtdEstoque": 35,
+        "idCategoria": 4
     },
     {
         "_id": 14,
@@ -1196,12 +1153,9 @@ db.produto.insertMany([
             "dataTermino": "2025-12-31",
             "percentualDesconto": 0.15
         },
-        "categoria": {
-            "id": 3,
-            "nome": "Camisolas"
-        },
         "qtdMinima": 8,
-        "qtdEstoque": 20
+        "qtdEstoque": 20,
+        "idCategoria": 3
     },
     {
         "_id": 15,
@@ -1216,12 +1170,9 @@ db.produto.insertMany([
             "dataTermino": "2023-12-31",
             "percentualDesconto": 0.20
         },
-        "categoria": {
-            "id": 9,
-            "nome": "Meias"
-        },
         "qtdMinima": 10,
-        "qtdEstoque": 5
+        "qtdEstoque": 5,
+        "idCategoria": 9
     },
     {
         "_id": 16,
@@ -1230,17 +1181,14 @@ db.produto.insertMany([
         "preco": 45.00,
         "tamanho": "P",
         "promocao": null,
-        "categoria": {
-            "id": 1,
-            "nome": "Lingerie"
-        },
         "qtdMinima": 15,
-        "qtdEstoque": 7
+        "qtdEstoque": 7,
+        "idCategoria": 1
     }
 ]);
 
 db.vendedor.insertMany([
-{
+    {
         "_id": "11122233344",
         "nome": "Carlos Lima",
         "email": "carlos@email.com",
@@ -1254,9 +1202,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua das Flores"
         },
         "telefones": [
-            {
-                "numero": "1191110001"
-            }
+            "1191110001"
         ]
     },
     {
@@ -1273,9 +1219,7 @@ db.vendedor.insertMany([
             "logradouro": "Av. Brasil"
         },
         "telefones": [
-            {
-                "numero": "1191110002"
-            }
+            "1191110002"
         ]
     },
     {
@@ -1292,9 +1236,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua A"
         },
         "telefones": [
-            {
-                "numero": "1191110003"
-            }
+            "1191110003"
         ]
     },
     {
@@ -1311,9 +1253,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua B"
         },
         "telefones": [
-            {
-                "numero": "1191110004"
-            }
+            "1191110004"
         ]
     },
     {
@@ -1330,9 +1270,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua C"
         },
         "telefones": [
-            {
-                "numero": "1191110005"
-            }
+            "1191110005"
         ]
     },
     {
@@ -1349,9 +1287,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua D"
         },
         "telefones": [
-            {
-                "numero": "1191110006"
-            }
+            "1191110006"
         ]
     },
     {
@@ -1368,9 +1304,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua E"
         },
         "telefones": [
-            {
-                "numero": "1191110007"
-            }
+            "1191110007"
         ]
     },
     {
@@ -1387,9 +1321,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua F"
         },
         "telefones": [
-            {
-                "numero": "1191110008"
-            }
+            "1191110008"
         ]
     },
     {
@@ -1406,9 +1338,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua G"
         },
         "telefones": [
-            {
-                "numero": "1191110009"
-            }
+            "1191110009"
         ]
     },
     {
@@ -1425,9 +1355,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua H"
         },
         "telefones": [
-            {
-                "numero": "1191110010"
-            }
+            "1191110010"
         ]
     }
 ]);

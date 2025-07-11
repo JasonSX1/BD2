@@ -1,71 +1,4 @@
-//Quais os produtos mais vendidos (em unidades) no período de X a Y? 
-
-SELECT 
-    p.idProduto,
-    p.nome AS produto,
-    SUM(pp.quantidadeProduto) AS total_vendido
-FROM Pedido_Produto pp
-JOIN Pedido pe ON pp.codPedido = pe.codPedido
-JOIN Produto p ON pp.idProduto = p.idProduto
-WHERE pe.data BETWEEN '2023-01-01' AND '2023-12-31'
-GROUP BY p.idProduto, p.nome
-ORDER BY total_vendido DESC;
-
 // ===============================================================================================================================================================================================
-
-db.pedido.aggregate([
-  {
-    // Filtra apenas pedidos no intervalo de datas desejado
-    $match: {
-      data: {
-        $gte: "2023-01-01",
-        $lte: "2023-12-31"
-      }
-    }
-  },
-  {
-    // "explode" o array de itens para processar item por item
-    $unwind: "$itens"
-  },
-  {
-    // Agrupa por idProduto e soma as quantidades
-    $group: {
-      _id: "$itens.idProduto",
-      total_vendido: { $sum: "$itens.quantidade" }
-    }
-  },
-  {
-    // Faz o join manual com a coleção de produtos para pegar o nome
-    $lookup: {
-      from: "produto",
-      localField: "_id",
-      foreignField: "_id",
-      as: "produto_info"
-    }
-  },
-  {
-    // Transforma o array `produto_info` em objeto simples
-    $unwind: "$produto_info"
-  },
-  {
-    // Projeta o resultado com id, nome e total
-    $project: {
-      _id: 0,
-      idProduto: "$_id",
-      produto: "$produto_info.nome",
-      total_vendido: 1
-    }
-  },
-  {
-    // Ordena pelos mais vendidos
-    $sort: {
-      total_vendido: -1
-    }
-  }
-]);
-
-// ===============================================================================================================================================================================================
-
 /*
 1. Análise de Rentabilidade por Categoria de Produto
 Objetivo: Identificar quais categorias de produtos são mais lucrativas, comparando a receita total de vendas com o custo de aquisição dos produtos. Isso ajuda a decidir onde investir em marketing e quais categorias negociar melhores preços com fornecedores.
@@ -98,19 +31,23 @@ ORDER BY LucroBruto DESC;
 
 db.pedido.aggregate([
   // "Explode" os itens para análise individual
-  { $unwind: "$itens" },
-
+  { $unwind: "$itens"
+  },
   // Agrupa por idProduto e acumula total vendido e receita
   {
     $group: {
       _id: "$itens.idProduto",
-      totalVendido: { $sum: "$itens.quantidade" },
+      totalVendido: { $sum: "$itens.quantidade"
+      },
       receitaBruta: {
-        $sum: { $multiply: ["$itens.quantidade", "$itens.precoUnitario"] }
+        $sum: { $multiply: [
+            "$itens.quantidade",
+            "$itens.precoUnitario"
+          ]
+        }
       }
     }
   },
-
   // Lookup para pegar info do produto (inclui categoria)
   {
     $lookup: {
@@ -120,20 +57,40 @@ db.pedido.aggregate([
       as: "produto"
     }
   },
-  { $unwind: "$produto" },
-
+  { $unwind: "$produto"
+  },
+  // Lookup para pegar categoria
+  {
+    $lookup: {
+      from: "categoria",
+      localField: "produto.idCategoria",
+      foreignField: "_id",
+      as: "categoria"
+    }
+  },
+  { $unwind: "$categoria"
+  },
   // Lookup para pegar fornecedores e calcular custo médio
   {
     $lookup: {
       from: "fornecedor",
-      let: { prodId: "$_id" },
+      let: { prodId: "$_id"
+      },
       pipeline: [
-        { $unwind: "$produtos_fornecidos" },
-        { $match: { $expr: { $eq: ["$produtos_fornecidos.idProduto", "$$prodId"] } } },
+        { $unwind: "$produtos_fornecidos"
+        },
+        { $match: { $expr: { $eq: [
+                "$produtos_fornecidos.idProduto",
+                "$$prodId"
+              ]
+            }
+          }
+        },
         {
           $group: {
             _id: "$produtos_fornecidos.idProduto",
-            custo_medio_unitario: { $avg: "$produtos_fornecidos.valor" }
+            custo_medio_unitario: { $avg: "$produtos_fornecidos.valor"
+            }
           }
         }
       ],
@@ -146,40 +103,103 @@ db.pedido.aggregate([
       preserveNullAndEmptyArrays: true // caso não haja fornecedor
     }
   },
-
   // Calcula o custo total e lucro bruto
   {
     $addFields: {
       custoTotal: {
         $cond: {
-          if: { $gt: ["$custo.custo_medio_unitario", null] },
-          then: { $multiply: ["$totalVendido", "$custo.custo_medio_unitario"] },
+          if: { $gt: [
+              "$custo.custo_medio_unitario",
+              null
+            ]
+          },
+          then: { $multiply: [
+              "$totalVendido",
+              "$custo.custo_medio_unitario"
+            ]
+          },
           else: 0
         }
       },
-      categoria: "$produto.categoria.nome"
+      categoria: "$categoria.nome"
     }
   },
-
   // Agrupa por categoria
+  {$group: {_id: "$categoria", TotalItensVendidos: { $sum: "$totalVendido"}, ReceitaBruta: { $sum: "$receitaBruta"}, CustoTotal: { $sum: "$custoTotal"}}},
+  // Calcula lucro
+  {$addFields: {
+      LucroBruto: { $subtract: ["$ReceitaBruta", "$CustoTotal"]},
+      Categoria: "$_id"
+    }
+  },
+  // Formata saída final
+  {
+    $project: {_id: 0, Categoria: 1, TotalItensVendidos: 1, ReceitaBruta: 1, CustoTotal: 1, LucroBruto: 1}
+  },
+  // Ordena por lucro
+  { $sort: { LucroBruto: -1}}
+]);
+
+
+db.pedido.aggregate([
+  { $unwind: "$itens" },
   {
     $group: {
-      _id: "$categoria",
-      TotalItensVendidos: { $sum: "$totalVendido" },
-      ReceitaBruta: { $sum: "$receitaBruta" },
-      CustoTotal: { $sum: "$custoTotal" }
+      _id: "$itens.idProduto",
+      totalVendido: { $sum: "$itens.quantidade" },
+      receitaBruta: { $sum: { $multiply: ["$itens.quantidade", "$itens.precoUnitario"] } }
     }
   },
-
-  // Calcula lucro
+  {
+    $lookup: {
+      from: "produto",
+      localField: "_id",
+      foreignField: "_id",
+      as: "produto"
+    }
+  },
+  { $unwind: "$produto" },
+  {
+    $lookup: {
+      from: "fornecedor",
+      let: { prodId: "$_id" },
+      pipeline: [
+        { $unwind: "$produtos_fornecidos" },
+        { $match: { $expr: { $eq: ["$produtos_fornecidos.idProduto", "$$prodId"] } } },
+        {
+          $group: {
+            _id: null,
+            custoMedio: { $avg: "$produtos_fornecidos.valor" }
+          }
+        }
+      ],
+      as: "custo"
+    }
+  },
+  { $unwind: { path: "$custo", preserveNullAndEmptyArrays: true } },
+  {
+    $lookup: {
+      from: "categoria",
+      localField: "produto.idCategoria",
+      foreignField: "_id",
+      as: "categoria"
+    }
+  },
+  { $unwind: "$categoria" },
+  {
+    $group: {
+      _id: "$categoria.nome",
+      ReceitaBruta: { $sum: "$receitaBruta" },
+      CustoTotal: { $sum: { $multiply: ["$totalVendido", "$custo.custoMedio"] } },
+      TotalItensVendidos: { $sum: "$totalVendido" }
+    }
+  },
   {
     $addFields: {
       LucroBruto: { $subtract: ["$ReceitaBruta", "$CustoTotal"] },
       Categoria: "$_id"
     }
   },
-
-  // Formata saída final
   {
     $project: {
       _id: 0,
@@ -190,14 +210,11 @@ db.pedido.aggregate([
       LucroBruto: 1
     }
   },
-
-  // Ordena por lucro
   { $sort: { LucroBruto: -1 } }
-]);
+])
 
 
 // ===============================================================================================================================================================================================
-
 /*
 Como Funciona:
 
@@ -217,7 +234,6 @@ GROUP BY: Agrupamos os resultados por nome da categoria para consolidar os totai
 
 ORDER BY: Ordenamos da categoria mais lucrativa para a menos lucrativa.
 */
-
 /*
 2. Desempenho de Vendedores e Valor Médio por Pedido
 Objetivo: Avaliar o desempenho de cada vendedor não apenas pelo faturamento total, mas também pelo valor médio que conseguem em cada venda. Vendedores com alto ticket médio podem estar aplicando melhores técnicas de venda (upselling/cross-selling).
@@ -241,7 +257,7 @@ db.vendedor.aggregate([
     // Faz o "join" com pedidos
     $lookup: {
       from: "pedido",
-      localField: "_id",         // CPF do vendedor
+      localField: "_id", // CPF do vendedor
       foreignField: "CPF_vendedor",
       as: "pedidos"
     }
@@ -249,14 +265,21 @@ db.vendedor.aggregate([
   {
     // Cria os campos agregados
     $addFields: {
-      TotalPedidos: { $size: "$pedidos" },
+      TotalPedidos: { $size: "$pedidos"
+      },
       FaturamentoTotal: {
         $sum: "$pedidos.valorTotal"
       },
       TicketMedio: {
         $cond: [
-          { $gt: [{ $size: "$pedidos" }, 0] },
-          { $avg: "$pedidos.valorTotal" },
+          { $gt: [
+              { $size: "$pedidos"
+              },
+              0
+            ]
+          },
+          { $avg: "$pedidos.valorTotal"
+          },
           0
         ]
       }
@@ -273,12 +296,12 @@ db.vendedor.aggregate([
     }
   },
   {
-    $sort: { FaturamentoTotal: -1 }
+    $sort: { FaturamentoTotal: -1
+    }
   }
 ]);
 
 // ===============================================================================================================================================================================================
-
 /*
 Como Funciona:
 
@@ -296,8 +319,6 @@ AVG(p.valorTotal): Calcula o valor médio de cada pedido (ticket médio).
 
 ORDER BY: Classifica os vendedores pelo faturamento total, do maior para o menor.
 */
-
-
 /*
 4. Análise de Clientes que Compram Itens Promocionais (CONSULTA CORRIGIDA)
 Objetivo: Identificar clientes que demonstram preferência por produtos que costumam ser incluídos em promoções, mesmo que a compra tenha ocorrido fora do período da oferta. Isso ajuda a criar um perfil de cliente sensível a preços para campanhas direcionadas.
@@ -330,9 +351,11 @@ db.cliente.aggregate([
     }
   },
   // Explode os pedidos
-  { $unwind: "$pedidos" },
+  { $unwind: "$pedidos"
+  },
   // Explode os itens de cada pedido
-  { $unwind: "$pedidos.itens" },
+  { $unwind: "$pedidos.itens"
+  },
   // JOIN com produtos (para verificar promoção)
   {
     $lookup: {
@@ -342,11 +365,13 @@ db.cliente.aggregate([
       as: "produto"
     }
   },
-  { $unwind: "$produto" },
+  { $unwind: "$produto"
+  },
   // Filtra apenas produtos com promoção
   {
     $match: {
-      "produto.promocao": { $ne: null }
+      "produto.promocao": { $ne: null
+      }
     }
   },
   // Agrupa por cliente e coleta os produtos distintos com promoção
@@ -357,7 +382,8 @@ db.cliente.aggregate([
         nome: "$nome",
         email: "$email"
       },
-      produtosPromocionais: { $addToSet: "$produto._id" }
+      produtosPromocionais: { $addToSet: "$produto._id"
+      }
     }
   },
   // Conta os produtos distintos comprados com promoção
@@ -366,17 +392,18 @@ db.cliente.aggregate([
       _id: 0,
       Cliente: "$_id.nome",
       email: "$_id.email",
-      ItensPromocionaisDistintosComprados: { $size: "$produtosPromocionais" }
+      ItensPromocionaisDistintosComprados: { $size: "$produtosPromocionais"
+      }
     }
   },
   // Ordena pela contagem descrescente
   {
-    $sort: { ItensPromocionaisDistintosComprados: -1 }
+    $sort: { ItensPromocionaisDistintosComprados: -1
+    }
   }
 ]);
 
 // ===============================================================================================================================================================================================
-
 /*
 Como Funciona:
 
@@ -388,7 +415,6 @@ GROUP BY: Agrupamos os resultados por cliente para poder contar quantos itens pr
 
 ORDER BY: Ordenamos o resultado para mostrar no topo os clientes que compraram a maior variedade de produtos "promocionáveis".
 */
-
 /*
 3. Análise de Estoque Crítico (Produtos Abaixo do Mínimo)
 Objetivo: Identificar produtos que necessitam de reposição urgente (estoque abaixo do mínimo), excluindo aqueles que estão em uma promoção ativa, pois a alta demanda pode ser temporária.
@@ -418,22 +444,36 @@ db.produto.aggregate([
   // 1. Filtra os produtos com estoque abaixo do mínimo
   {
     $match: {
-      $expr: { $lt: ["$qtdEstoque", "$qtdMinima"] }
+      $expr: { $lt: [
+          "$qtdEstoque",
+          "$qtdMinima"
+        ]
+      }
     }
   },
-
   // 2. Filtra produtos SEM promoção ativa
   {
     $match: {
       $or: [
-        { promocao: null },
-        { promocao: { $exists: false } },
+        { promocao: null
+        },
+        { promocao: { $exists: false
+          }
+        },
         {
           $expr: {
             $not: {
               $and: [
-                { $gte: [new Date(), { $toDate: "$promocao.dataInicio" }] },
-                { $lte: [new Date(), { $toDate: "$promocao.dataTermino" }] }
+                { $gte: [new Date(),
+                    { $toDate: "$promocao.dataInicio"
+                    }
+                  ]
+                },
+                { $lte: [new Date(),
+                    { $toDate: "$promocao.dataTermino"
+                    }
+                  ]
+                }
               ]
             }
           }
@@ -441,7 +481,6 @@ db.produto.aggregate([
       ]
     }
   },
-
   // 3. Calcula unidades faltantes e projeta os campos desejados
   {
     $project: {
@@ -450,7 +489,11 @@ db.produto.aggregate([
       nome: 1,
       qtdEstoque: 1,
       qtdMinima: 1,
-      UnidadesFaltantes: { $subtract: ["$qtdMinima", "$qtdEstoque"] }
+      UnidadesFaltantes: { $subtract: [
+          "$qtdMinima",
+          "$qtdEstoque"
+        ]
+      }
     }
   }
 ])
@@ -465,7 +508,6 @@ Subconsulta (NOT IN): Uma subconsulta cria uma lista de todos os produtos que es
 
 Resultado: A lista final mostra apenas os produtos com estoque crítico devido a vendas regulares, e não por picos promocionais, fornecendo um sinal mais preciso para a área de compras.
 */
-
 /*
 6. Ranking de Produtos Mais Vendidos por Período
 Objetivo: Identificar os produtos mais vendidos (em unidades) dentro de um intervalo de datas específico. Isso é fundamental para entender a demanda, planejar o estoque e direcionar campanhas de marketing.
@@ -480,7 +522,7 @@ SELECT
 FROM Pedido_Produto pp
 JOIN Pedido pe ON pp.codPedido = pe.codPedido
 JOIN Produto p ON pp.idProduto = p.idProduto
-WHERE pe.data BETWEEN '2025-07-01' AND '2025-07-10' -- Defina aqui o período desejado
+WHERE pe.data BETWEEN '2025-07-01' AND '2025-07-10'
 GROUP BY p.idProduto, p.nome
 ORDER BY total_vendido DESC;
 
@@ -495,12 +537,10 @@ db.pedido.aggregate([
       }
     }
   },
-
   // 2. "Explodir" os itens do pedido
   {
     $unwind: "$itens"
   },
-
   // 3. Juntar com a collection produto
   {
     $lookup: {
@@ -510,12 +550,10 @@ db.pedido.aggregate([
       as: "produtoInfo"
     }
   },
-
   // 4. Transformar produtoInfo de array para objeto
   {
     $unwind: "$produtoInfo"
   },
-
   // 5. Agrupar pelo idProduto e nome, somando as quantidades
   {
     $group: {
@@ -523,10 +561,10 @@ db.pedido.aggregate([
         idProduto: "$itens.idProduto",
         nome: "$produtoInfo.nome"
       },
-      total_vendido: { $sum: "$itens.quantidade" }
+      total_vendido: { $sum: "$itens.quantidade"
+      }
     }
   },
-
   // 6. Projetar os campos no formato desejado
   {
     $project: {
@@ -536,15 +574,14 @@ db.pedido.aggregate([
       total_vendido: 1
     }
   },
-
   // 7. Ordenar por total vendido desc
   {
-    $sort: { total_vendido: -1 }
+    $sort: { total_vendido: -1
+    }
   }
 ])
 
 // ===============================================================================================================================================================================================
-
 /*
 Como Funciona:
 

@@ -1,0 +1,67 @@
+// COLECAO CATEGORIA
+// ===================
+// Banco de Dados IFBA
+// ===================
+// Cria o banco de dados IFBA
+use kantointimo
+
+// Exclui banco de dados selecionado
+// db.dropDatabase();
+// Exclui a coleção
+db.categoria.drop();
+// Remove todos os documentos da coleção
+// db.fornecedor.remove({});
+// Insere vários documentos na coleção
+db.categoria.insertMany([
+    {
+        "_id": 1,
+        "nome": "Lingerie"
+    },
+    {
+        "_id": 2,
+        "nome": "Pijamas"
+    },
+    {
+        "_id": 3,
+        "nome": "Camisolas"
+    },
+    {
+        "_id": 4,
+        "nome": "Boxers"
+    },
+    {
+        "_id": 5,
+        "nome": "Sutiãs"
+    },
+    {
+        "_id": 6,
+        "nome": "Cuecas"
+    },
+    {
+        "_id": 7,
+        "nome": "Robes"
+    },
+    {
+        "_id": 8,
+        "nome": "Conjuntos"
+    },
+    {
+        "_id": 9,
+        "nome": "Meias"
+    },
+    {
+        "_id": 10,
+        "nome": "Acessórios"
+    }
+]);
+
+
+// Mostra as coleções criadas
+show collections
+
+// Mostra todos os banco de dados criados
+// show dbs
+show databases
+
+// Consulta todos os documentos da coleção fornecedor
+db.fornecedor.find().pretty()

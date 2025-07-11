@@ -13,7 +13,7 @@ db.vendedor.drop();
 // db.vendedor.remove({});
 // Insere vários documentos na coleção
 db.vendedor.insertMany([
-{
+    {
         "_id": "11122233344",
         "nome": "Carlos Lima",
         "email": "carlos@email.com",
@@ -26,11 +26,7 @@ db.vendedor.insertMany([
             "numero": "123",
             "logradouro": "Rua das Flores"
         },
-        "telefones": [
-            {
-                "numero": "1191110001"
-            }
-        ]
+        "telefones": ["1191110001"]
     },
     {
         "_id": "22233344455",
@@ -46,9 +42,7 @@ db.vendedor.insertMany([
             "logradouro": "Av. Brasil"
         },
         "telefones": [
-            {
-                "numero": "1191110002"
-            }
+            "1191110002"
         ]
     },
     {
@@ -65,9 +59,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua A"
         },
         "telefones": [
-            {
-                "numero": "1191110003"
-            }
+            "1191110003"
         ]
     },
     {
@@ -84,9 +76,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua B"
         },
         "telefones": [
-            {
-                "numero": "1191110004"
-            }
+            "1191110004"
         ]
     },
     {
@@ -103,9 +93,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua C"
         },
         "telefones": [
-            {
-                "numero": "1191110005"
-            }
+            "1191110005"
         ]
     },
     {
@@ -122,9 +110,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua D"
         },
         "telefones": [
-            {
-                "numero": "1191110006"
-            }
+            "1191110006"
         ]
     },
     {
@@ -141,9 +127,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua E"
         },
         "telefones": [
-            {
-                "numero": "1191110007"
-            }
+            "1191110007"
         ]
     },
     {
@@ -160,9 +144,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua F"
         },
         "telefones": [
-            {
-                "numero": "1191110008"
-            }
+            "1191110008"
         ]
     },
     {
@@ -179,9 +161,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua G"
         },
         "telefones": [
-            {
-                "numero": "1191110009"
-            }
+            "1191110009"
         ]
     },
     {
@@ -198,9 +178,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua H"
         },
         "telefones": [
-            {
-                "numero": "1191110010"
-            }
+            "1191110010"
         ]
     }
 ]);
@@ -214,19 +192,5 @@ show databases
 
 // Consulta todos os documentos da coleção vendedor
 db.vendedor.find().pretty()
-
-
-db.cliente.aggregate([
-    { $project: { fields: { $objectToArray: "$$ROOT"
-            }
-        }
-    },
-    { $unwind: "$fields"
-    },
-    { $group: { _id: null, allKeys: { $addToSet: "$fields.k"
-            }
-        }
-    }
-])
 
 db.vendedor.findOne()
