@@ -263,7 +263,7 @@ db.produto.aggregate([
             $not: {
               $anyElementTrue: {
                 $map: {
-                  input: { $ifNull: ["$promocoes", []] },
+                  input: "$promocoes",
                   as: "promo",
                   in: {
                     $and: [
