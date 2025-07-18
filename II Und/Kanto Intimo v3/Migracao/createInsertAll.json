@@ -640,9 +640,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua das Flores"
         },
         "telefones": [
-            {
-                "numero": "1133330001"
-            }
+            "1133330001"
         ],
         "produtos_fornecidos": [
             {
@@ -672,9 +670,7 @@ db.fornecedor.insertMany([
             "logradouro": "Av. Brasil"
         },
         "telefones": [
-            {
-                "numero": "1133330002"
-            }
+            "1133330002"
         ],
         "produtos_fornecidos": [
             {
@@ -704,9 +700,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua A"
         },
         "telefones": [
-            {
-                "numero": "1133330003"
-            }
+            "1133330003"
         ],
         "produtos_fornecidos": [
             {
@@ -736,9 +730,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua B"
         },
         "telefones": [
-            {
-                "numero": "1133330004"
-            }
+            "1133330004"
         ],
         "produtos_fornecidos": [
             {
@@ -768,9 +760,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua C"
         },
         "telefones": [
-            {
-                "numero": "1133330005"
-            }
+            "1133330005"
         ],
         "produtos_fornecidos": [
             {
@@ -800,9 +790,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua D"
         },
         "telefones": [
-            {
-                "numero": "1133330006"
-            }
+            "1133330006"
         ],
         "produtos_fornecidos": [
             {
@@ -832,9 +820,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua E"
         },
         "telefones": [
-            {
-                "numero": "1133330007"
-            }
+            "1133330007"
         ],
         "produtos_fornecidos": [
             {
@@ -858,9 +844,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua F"
         },
         "telefones": [
-            {
-                "numero": "1133330008"
-            }
+            "1133330008"
         ],
         "produtos_fornecidos": [
             {
@@ -884,9 +868,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua G"
         },
         "telefones": [
-            {
-                "numero": "1133330009"
-            }
+            "1133330009"
         ],
         "produtos_fornecidos": [
             {
@@ -910,9 +892,7 @@ db.fornecedor.insertMany([
             "logradouro": "Rua H"
         },
         "telefones": [
-            {
-                "numero": "1133330010"
-            }
+            "1133330010"
         ],
         "produtos_fornecidos": [
             {
@@ -1287,9 +1267,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua das Flores"
         },
         "telefones": [
-            {
-                "numero": "1191110001"
-            }
+            "1191110001"
         ]
     },
     {
@@ -1306,9 +1284,7 @@ db.vendedor.insertMany([
             "logradouro": "Av. Brasil"
         },
         "telefones": [
-            {
-                "numero": "1191110002"
-            }
+            "1191110002"
         ]
     },
     {
@@ -1325,9 +1301,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua A"
         },
         "telefones": [
-            {
-                "numero": "1191110003"
-            }
+            "1191110003"
         ]
     },
     {
@@ -1344,9 +1318,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua B"
         },
         "telefones": [
-            {
-                "numero": "1191110004"
-            }
+            "1191110004"
         ]
     },
     {
@@ -1363,9 +1335,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua C"
         },
         "telefones": [
-            {
-                "numero": "1191110005"
-            }
+            "1191110005"
         ]
     },
     {
@@ -1382,9 +1352,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua D"
         },
         "telefones": [
-            {
-                "numero": "1191110006"
-            }
+            "1191110006"
         ]
     },
     {
@@ -1401,9 +1369,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua E"
         },
         "telefones": [
-            {
-                "numero": "1191110007"
-            }
+            "1191110007"
         ]
     },
     {
@@ -1420,9 +1386,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua F"
         },
         "telefones": [
-            {
-                "numero": "1191110008"
-            }
+            "1191110008"
         ]
     },
     {
@@ -1439,9 +1403,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua G"
         },
         "telefones": [
-            {
-                "numero": "1191110009"
-            }
+            "1191110009"
         ]
     },
     {
@@ -1458,9 +1420,7 @@ db.vendedor.insertMany([
             "logradouro": "Rua H"
         },
         "telefones": [
-            {
-                "numero": "1191110010"
-            }
+            "1191110010"
         ]
     }
 ]);

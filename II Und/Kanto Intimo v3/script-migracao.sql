@@ -37,9 +37,12 @@ SELECT
       "UF", e.UF
     ),
     "telefones", (
-      SELECT JSON_ARRAYAGG(JSON_OBJECT("numero", tv.telefone))
-      FROM telefones_vendedor tv
-      WHERE tv.CPF_vendedor = v.CPF
+      SELECT JSON_ARRAYAGG(tv2.telefone)
+      FROM (
+        SELECT DISTINCT tv.telefone
+        FROM telefones_vend tv
+        WHERE tv.CPF_vendedor = v.CPF
+      ) AS tv2
     )
   ) AS JSON
 FROM Vendedor v
