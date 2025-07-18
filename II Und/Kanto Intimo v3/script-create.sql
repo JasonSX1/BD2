@@ -1,19 +1,15 @@
-CREATE DATABASE IF NOT EXISTS LojaKanto;
-USE LojaKanto;
+/* CREATE: */
+DROP DATABASE IF EXISTS kantointimo;
+CREATE DATABASE kantointimo;
+USE kantointimo;
 
-DROP TABLE IF EXISTS Pedido_Produto;
-DROP TABLE IF EXISTS Fornecedor_Produto;
-DROP TABLE IF EXISTS telefones_vendedor;
-DROP TABLE IF EXISTS telefones_forn;
-DROP TABLE IF EXISTS telefones_cli;
-DROP TABLE IF EXISTS Pedido;
-DROP TABLE IF EXISTS Produto;
-DROP TABLE IF EXISTS Promocao;
-DROP TABLE IF EXISTS Categoria;
-DROP TABLE IF EXISTS Fornecedor;
-DROP TABLE IF EXISTS Vendedor;
-DROP TABLE IF EXISTS Cliente;
-DROP TABLE IF EXISTS Endereco;
+CREATE TABLE Cliente (
+    CPF CHAR (11) PRIMARY KEY,
+    idEndereco INT UNSIGNED,
+    nome VARCHAR(255) NOT NULL,
+    dataNasc DATE NOT NULL,
+    email VARCHAR(255)
+);
 
 CREATE TABLE Endereco (
     idEndereco INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -21,47 +17,16 @@ CREATE TABLE Endereco (
     bairro VARCHAR(100),
     numero VARCHAR(5) NOT NULL,
     CEP VARCHAR(8) NOT NULL,
-    cidade VARCHAR(30) NOT NULL,
-    UF VARCHAR(2) NOT NULL
+    cidade  VARCHAR(30) NOT NULL,
+    UF CHAR(2) NOT NULL
 );
 
-CREATE TABLE Cliente (
-    CPF VARCHAR(11) PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    dataNasc DATE NOT NULL,
-    email VARCHAR(255),
-    IdEndereco INT UNSIGNED,
-    FOREIGN KEY (IdEndereco) REFERENCES Endereco(idEndereco)
-);
-
-CREATE TABLE Vendedor (
-    CPF VARCHAR(11) PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    dataNasc DATE NOT NULL,
-    email VARCHAR(255),
-    idEndereco INT UNSIGNED,
-    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco)
-);
-
-CREATE TABLE Fornecedor (
-    CNPJ VARCHAR(14) PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    email VARCHAR(255),
-    idEndereco INT UNSIGNED,
-    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco)
-);
-
-CREATE TABLE Categoria (
-    ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE Promocao (
-    ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    descricao VARCHAR(255),
-    dataInicio DATE NOT NULL,
-    dataTermino DATE NOT NULL,
-    percentualDesconto DECIMAL(3,2) UNSIGNED NOT NULL
+CREATE TABLE Pedido (
+    codPedido INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    CPF_cliente CHAR (11),
+    CPF_vendedor CHAR(11),
+    data DATE NOT NULL,
+    valorTotal DECIMAL(7,2) NOT NULL
 );
 
 CREATE TABLE Produto (
@@ -69,63 +34,135 @@ CREATE TABLE Produto (
     nome VARCHAR(60) NOT NULL,
     tamanho VARCHAR(4) NOT NULL,
     cor VARCHAR(20) NOT NULL,
-    preco DECIMAL(7,2) UNSIGNED NOT NULL,
-    qtdEstoque INT UNSIGNED,
-    qtdMinima INT UNSIGNED NOT NULL,
-    idCategoria INT UNSIGNED,
-    idPromocao INT UNSIGNED,
-    FOREIGN KEY (idCategoria) REFERENCES Categoria(ID),
-    FOREIGN KEY (idPromocao) REFERENCES Promocao(ID)
+    preco DECIMAL(7,2) NOT NULL,
+    qtdEstoque INT UNSIGNED NOT NULL,
+    idCategoria INT UNSIGNED NOT NULL,
+    qtdMinima INT UNSIGNED NOT NULL
 );
 
-CREATE TABLE Pedido (
-    codPedido INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    data DATE NOT NULL,
-    valorTotal DECIMAL(7,2) UNSIGNED NOT NULL,
-    CPF_cliente VARCHAR(11),
-    CPF_vendedor VARCHAR(11),
-    FOREIGN KEY (CPF_cliente) REFERENCES Cliente(CPF),
-    FOREIGN KEY (CPF_vendedor) REFERENCES Vendedor(CPF)
+CREATE TABLE Fornecedor (
+    CNPJ CHAR(14) PRIMARY KEY,
+    idEndereco INT UNSIGNED,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) 
+);
+
+CREATE TABLE Promocao (
+    ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(255),
+    percentualDesconto DECIMAL(3,2) NOT NULL
+);
+
+CREATE TABLE Vendedor (
+    CPF CHAR(11) PRIMARY KEY,
+    idEndereco INT UNSIGNED,
+    nome VARCHAR(255) NOT NULL,
+    dataNasc DATE NOT NULL,
+    email VARCHAR(255)
+);
+
+CREATE TABLE Categoria (
+    ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome CHAR (50) NOT NULL
 );
 
 CREATE TABLE telefones_cli (
     telefone CHAR(11) NOT NULL,
-    CPF_cliente VARCHAR(11),
-    PRIMARY KEY (telefone, CPF_cliente),
-    FOREIGN KEY (CPF_cliente) REFERENCES Cliente(CPF)
+    CPF_cliente CHAR (11),
+    PRIMARY KEY (telefone, CPF_cliente)
 );
 
 CREATE TABLE telefones_forn (
     telefone CHAR(15) NOT NULL,
-    CNPJ VARCHAR(14),
-    PRIMARY KEY (telefone, CNPJ),
-    FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ)
+    CNPJ CHAR(14),
+    PRIMARY KEY (telefone, CNPJ)
 );
 
-CREATE TABLE telefones_vendedor (
+CREATE TABLE telefones_vend (
     telefone CHAR(15) NOT NULL,
-    CPF_vendedor VARCHAR(11),
-    PRIMARY KEY (telefone, CPF_vendedor),
-    FOREIGN KEY (CPF_vendedor) REFERENCES Vendedor(CPF)
+    CPF_vendedor CHAR(11),
+    PRIMARY KEY (telefone, CPF_vendedor)
 );
 
 CREATE TABLE Fornecedor_Produto (
-    CNPJ VARCHAR(14),
-    idProduto INT UNSIGNED,
+    CNPJ CHAR(14) NOT NULL,
+    idProduto INT UNSIGNED NOT NULL,
     data DATE,
     quantidade INT UNSIGNED NOT NULL,
-    valor DECIMAL(7,2) UNSIGNED NOT NULL,
-    PRIMARY KEY (data, CNPJ, idProduto),
-    FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ),
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+    valor DECIMAL(7,2) NOT NULL,
+    PRIMARY KEY (data, CNPJ, idProduto)
 );
 
 CREATE TABLE Pedido_Produto (
-    codPedido INT UNSIGNED,
-    idProduto INT UNSIGNED,
+    idProduto INT UNSIGNED NOT NULL,
+    codPedido INT UNSIGNED NOT NULL,
     quantidadeProduto INT UNSIGNED NOT NULL,
-    precoUnitario DECIMAL(7,2) UNSIGNED NOT NULL,
-    PRIMARY KEY (codPedido, idProduto),
-    FOREIGN KEY (codPedido) REFERENCES Pedido(codPedido),
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+    precoUnitario DECIMAL(7,2) NOT NULL,
+    PRIMARY KEY (idProduto, codPedido)
 );
+
+CREATE TABLE Produto_Promocao (
+    idProduto INT UNSIGNED NOT NULL,
+    idPromocao INT UNSIGNED NOT NULL,
+    dataInicio DATE NOT NULL,
+    dataTermino DATE NOT NULL,
+    PRIMARY KEY (idProduto, idPromocao)
+);
+ 
+ALTER TABLE Cliente ADD CONSTRAINT FK_Cliente_2
+    FOREIGN KEY (idEndereco)
+    REFERENCES Endereco (idEndereco);
+ 
+ALTER TABLE Pedido ADD CONSTRAINT FK_Pedido_2
+    FOREIGN KEY (CPF_cliente)
+    REFERENCES Cliente (CPF)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Pedido ADD CONSTRAINT FK_Pedido_3
+    FOREIGN KEY (CPF_vendedor)
+    REFERENCES Vendedor (CPF)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Fornecedor ADD CONSTRAINT FK_Fornecedor_2
+    FOREIGN KEY (idEndereco)
+    REFERENCES Endereco (idEndereco);
+ 
+ALTER TABLE Vendedor ADD CONSTRAINT FK_Vendedor_2
+    FOREIGN KEY (idEndereco)
+    REFERENCES Endereco (idEndereco);
+ 
+ALTER TABLE telefones_cli ADD CONSTRAINT FK_telefones_cli_2
+    FOREIGN KEY (CPF_cliente)
+    REFERENCES Cliente (CPF);
+ 
+ALTER TABLE telefones_forn ADD CONSTRAINT FK_telefones_forn_2
+    FOREIGN KEY (CNPJ)
+    REFERENCES Fornecedor (CNPJ);
+ 
+ALTER TABLE telefones_vend ADD CONSTRAINT FK_telefones_vend_2
+    FOREIGN KEY (CPF_vendedor)
+    REFERENCES Vendedor (CPF);
+ 
+ALTER TABLE Fornecedor_Produto ADD CONSTRAINT FK_Fornecedor_Produto_2
+    FOREIGN KEY (CNPJ)
+    REFERENCES Fornecedor (CNPJ);
+ 
+ALTER TABLE Fornecedor_Produto ADD CONSTRAINT FK_Fornecedor_Produto_3
+    FOREIGN KEY (idProduto)
+    REFERENCES Produto (idProduto);
+ 
+ALTER TABLE Pedido_Produto ADD CONSTRAINT FK_Pedido_Produto_2
+    FOREIGN KEY (idProduto)
+    REFERENCES Produto (idProduto);
+ 
+ALTER TABLE Pedido_Produto ADD CONSTRAINT FK_Pedido_Produto_3
+    FOREIGN KEY (codPedido)
+    REFERENCES Pedido (codPedido);
+ 
+ALTER TABLE Produto_Promocao ADD CONSTRAINT FK_Produto_Promocao_2
+    FOREIGN KEY (idProduto)
+    REFERENCES Produto (idProduto);
+ 
+ALTER TABLE Produto_Promocao ADD CONSTRAINT FK_Produto_Promocao_3
+    FOREIGN KEY (idPromocao)
+    REFERENCES Promocao (ID);

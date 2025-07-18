@@ -1,4 +1,5 @@
-USE LojaKanto;
+/* INSERT: */
+USE kantointimo;
 
 INSERT INTO Endereco (logradouro, bairro, numero, CEP, cidade, UF) VALUES
 ('Rua das Flores', 'Centro', '123', '12345678', 'São Paulo', 'SP'),
@@ -57,37 +58,54 @@ INSERT INTO Categoria (nome) VALUES
 ('Lingerie'), ('Pijamas'), ('Camisolas'), ('Boxers'), ('Sutiãs'),
 ('Cuecas'), ('Robes'), ('Conjuntos'), ('Meias'), ('Acessórios');
 
-INSERT INTO Promocao (descricao, dataInicio, dataTermino, percentualDesconto) VALUES
-('Promo Verão', '2025-01-01', '2025-01-31', 0.10), -- Inativa (terminou em Jan/2025)
-('Promo Inverno', '2025-06-01', '2025-06-30', 0.15), -- Inativa (terminou em Jun/2025)
-('Black Friday', '2025-11-25', '2025-11-28', 0.30), -- Futura
-('Natal', '2025-12-10', '2025-12-25', 0.25), -- Futura
-('Outubro Rosa', '2025-10-01', '2025-10-31', 0.20), -- Futura
-('Janeiro Branco', '2025-01-01', '2025-01-15', 0.05), -- Passada
-('Aniversário Loja', '2025-03-01', '2025-03-05', 0.40), -- Passada
-('Semana do Cliente', '2025-09-15', '2025-09-20', 0.18), -- Futura
-('Dia das Mães', '2025-05-01', '2025-05-10', 0.22), -- Passada
-('Volta às Aulas', '2025-02-01', '2025-02-10', 0.08), -- Passada
-('Promo Primavera', '2025-01-01', '2025-12-31', 0.15), -- ATIVA (Julho/2025)
-('Queima de Estoque', '2023-01-01', '2023-12-31', 0.20); -- Passada (para testar CONSULTA 5)
+INSERT INTO Promocao (descricao, percentualDesconto) VALUES
+('Promo Verão', 0.10),
+('Promo Inverno', 0.15),
+('Black Friday', 0.30),
+('Natal', 0.25),
+('Outubro Rosa', 0.20),
+('Janeiro Branco', 0.05),
+('Aniversário Loja', 0.40),
+('Semana do Cliente', 0.18),
+('Dia das Mães', 0.22),
+('Volta às Aulas', 0.08),
+('Promo Primavera', 0.15),
+('Queima de Estoque', 0.20);
 
-INSERT INTO Produto (nome, tamanho, cor, preco, qtdEstoque, qtdMinima, idCategoria, idPromocao) VALUES
-('Calcinha Renda', 'M', 'Vermelho', 29.90, 50, 10, 1, 1), -- Promo Verão (inativa)
-('Pijama Algodão', 'G', 'Azul', 49.90, 30, 5, 2, 2), -- Promo Inverno (inativa)
-('Camisola Seda', 'P', 'Rosa', 89.90, 20, 3, 3, 3), -- Black Friday (futura)
-('Cueca Boxer', 'M', 'Preto', 19.90, 100, 20, 4, 4), -- Natal (futura)
-('Sutiã Comfort', 'G', 'Branco', 39.90, 40, 8, 5, 5), -- Outubro Rosa (futura)
-('Cueca Slip', 'M', 'Cinza', 15.90, 80, 15, 6, 6), -- Janeiro Branco (passada)
-('Robe Cetim', 'U', 'Roxo', 59.90, 15, 4, 7, 7), -- Aniversário Loja (passada)
-('Conjunto Luxo', 'M', 'Bordô', 99.90, 12, 3, 8, 8), -- Semana do Cliente (futura)
-('Meia Calça', 'U', 'Bege', 9.90, 60, 10, 9, 9), -- Dia das Mães (passada)
-('Cinta Modeladora', 'G', 'Preto', 89.90, 10, 2, 10, 10), -- Volta às Aulas (passada)
-('Sutiã Floral', 'G', 'Rosa', 39.90, 20, 10, 5, 11), -- Ligado à Promo Primavera (ATIVA)
-('Pijama Luxo', 'M', 'Preto', 79.90, 15, 5, 2, 11), -- Ligado à Promo Primavera (ATIVA)
-('Cueca Boxer Sport', 'M', 'Azul', 30, 35, 25.00, 4, 3), -- QtdEstoque < QtdMinima, Promo Futura (CONSULTA 5)
-('Camisola Renda', 'P', 'Vinho', 99.90, 20, 8, 3, 11), -- Ligado à Promo Primavera (ATIVA)
-('Meia Esportiva', 'U', 'Branca', 12.00, 5, 10, 9, 12), -- QtdEstoque < QtdMinima, Promo Passada (CONSULTA 5)
-('Top Cropped', 'P', 'Verde', 45.00, 7, 15, 1, NULL); -- QtdEstoque < QtdMinima, Sem Promoção (CONSULTA 5)
+INSERT INTO Produto (nome, tamanho, cor, preco, qtdEstoque, qtdMinima, idCategoria) VALUES
+('Calcinha Renda', 'M', 'Vermelho', 29.90, 50, 10, 1),
+('Pijama Algodão', 'G', 'Azul', 49.90, 30, 5, 2),
+('Camisola Seda', 'P', 'Rosa', 89.90, 20, 3, 3),
+('Cueca Boxer', 'M', 'Preto', 19.90, 100, 20, 4),
+('Sutiã Comfort', 'G', 'Branco', 39.90, 40, 8, 5),
+('Cueca Slip', 'M', 'Cinza', 15.90, 80, 15, 6),
+('Robe Cetim', 'U', 'Roxo', 59.90, 15, 4, 7),
+('Conjunto Luxo', 'M', 'Bordô', 99.90, 12, 3, 8),
+('Meia Calça', 'U', 'Bege', 9.90, 60, 10, 9),
+('Cinta Modeladora', 'G', 'Preto', 89.90, 10, 2, 10),
+('Sutiã Floral', 'G', 'Rosa', 39.90, 20, 10, 5),
+('Pijama Luxo', 'M', 'Preto', 79.90, 15, 5, 2),
+('Cueca Boxer Sport', 'M', 'Azul', 30.00, 35, 25, 4),
+('Camisola Renda', 'P', 'Vinho', 99.90, 20, 8, 3),
+('Meia Esportiva', 'U', 'Branca', 12.00, 5, 10, 9),
+('Top Cropped', 'P', 'Verde', 45.00, 7, 15, 1);
+
+INSERT INTO Produto_Promocao (idProduto, idPromocao, dataInicio, dataTermino) VALUES
+(1, 1, '2025-01-01', '2025-01-31'),
+(2, 2, '2025-06-01', '2025-06-30'),
+(3, 3, '2025-11-25', '2025-11-28'),
+(4, 4, '2025-12-10', '2025-12-25'),
+(5, 5, '2025-10-01', '2025-10-31'),
+(6, 6, '2025-01-01', '2025-01-15'),
+(7, 7, '2025-03-01', '2025-03-05'),
+(8, 8, '2025-09-15', '2025-09-20'),
+(9, 9, '2025-05-01', '2025-05-10'),
+(10, 10, '2025-02-01', '2025-02-10'),
+(11, 11, '2025-01-01', '2025-12-31'),
+(12, 11, '2025-01-01', '2025-12-31'),
+(13, 3, '2025-11-25', '2025-11-28'),
+(14, 11, '2025-01-01', '2025-12-31'),
+(15, 12, '2023-01-01', '2023-12-31');
 
 INSERT INTO Pedido (data, valorTotal, CPF_cliente, CPF_vendedor) VALUES
 -- Pedidos de 2025 (para CONSULTA 6)
@@ -143,7 +161,7 @@ INSERT INTO telefones_forn (telefone, CNPJ) VALUES
 ('1133330009', '92345678000199'),
 ('1133330010', '10345678000199');
 
-INSERT INTO telefones_vendedor (telefone, CPF_vendedor) VALUES
+INSERT INTO telefones_vend (telefone, CPF_vendedor) VALUES
 ('1191110001', '11122233344'),
 ('1191110002', '22233344455'),
 ('1191110003', '33344455566'),

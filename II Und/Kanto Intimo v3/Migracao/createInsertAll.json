@@ -1,0 +1,1466 @@
+use kantointimo
+
+db.cliente.drop();
+db.fornecedor.drop();
+db.produto.drop();
+db.vendedor.drop();
+db.categoria.drop()
+
+db.categoria.insertMany([
+    {
+        "_id": 1,
+        "nome": "Lingerie"
+    },
+    {
+        "_id": 2,
+        "nome": "Pijamas"
+    },
+    {
+        "_id": 3,
+        "nome": "Camisolas"
+    },
+    {
+        "_id": 4,
+        "nome": "Boxers"
+    },
+    {
+        "_id": 5,
+        "nome": "Sutiãs"
+    },
+    {
+        "_id": 6,
+        "nome": "Cuecas"
+    },
+    {
+        "_id": 7,
+        "nome": "Robes"
+    },
+    {
+        "_id": 8,
+        "nome": "Conjuntos"
+    },
+    {
+        "_id": 9,
+        "nome": "Meias"
+    },
+    {
+        "_id": 10,
+        "nome": "Acessórios"
+    }
+]);
+
+db.cliente.insertMany([
+    {
+        "_id": "12345678901",
+        "nome": "João Silva",
+        "email": "joao@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-01",
+                "itens": [
+                    {
+                        "idProduto": 1,
+                        "quantidade": 2,
+                        "precoUnitario": 29.90
+                    }
+                ],
+                "codPedido": 1,
+                "valorTotal": 59.80,
+                "CPF_vendedor": "11122233344"
+            },
+            {
+                "data": "2023-01-15",
+                "itens": [
+                    {
+                        "idProduto": 1,
+                        "quantidade": 3,
+                        "precoUnitario": 29.90
+                    },
+                    {
+                        "idProduto": 5,
+                        "quantidade": 2,
+                        "precoUnitario": 39.90
+                    }
+                ],
+                "codPedido": 12,
+                "valorTotal": 150.00,
+                "CPF_vendedor": "11122233344"
+            }
+        ],
+        "dataNasc": "1990-05-15",
+        "endereco": {
+            "UF": "SP",
+            "CEP": "12345678",
+            "bairro": "Centro",
+            "cidade": "São Paulo",
+            "numero": "123",
+            "logradouro": "Rua das Flores"
+        },
+        "telefones": [
+            "11999999991",
+            "77999999999"
+        ]
+    },
+    {
+        "_id": "98765432100",
+        "nome": "Maria Souza",
+        "email": "maria@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-02",
+                "itens": [
+                    {
+                        "idProduto": 2,
+                        "quantidade": 1,
+                        "precoUnitario": 49.90
+                    }
+                ],
+                "codPedido": 2,
+                "valorTotal": 49.90,
+                "CPF_vendedor": "22233344455"
+            },
+            {
+                "data": "2023-02-20",
+                "itens": [
+                    {
+                        "idProduto": 2,
+                        "quantidade": 1,
+                        "precoUnitario": 49.90
+                    }
+                ],
+                "codPedido": 13,
+                "valorTotal": 75.50,
+                "CPF_vendedor": "22233344455"
+            }
+        ],
+        "dataNasc": "1985-08-22",
+        "endereco": {
+            "UF": "RJ",
+            "CEP": "87654321",
+            "bairro": "Jardins",
+            "cidade": "Rio de Janeiro",
+            "numero": "456",
+            "logradouro": "Av. Brasil"
+        },
+        "telefones": [
+            "11999999992"
+        ]
+    },
+    {
+        "_id": "11111111111",
+        "nome": "Carlos Andrade",
+        "email": "carlos@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-03",
+                "itens": [
+                    {
+                        "idProduto": 3,
+                        "quantidade": 1,
+                        "precoUnitario": 89.90
+                    }
+                ],
+                "codPedido": 3,
+                "valorTotal": 89.90,
+                "CPF_vendedor": "33344455566"
+            },
+            {
+                "data": "2023-03-01",
+                "itens": [
+                    {
+                        "idProduto": 3,
+                        "quantidade": 1,
+                        "precoUnitario": 89.90
+                    },
+                    {
+                        "idProduto": 4,
+                        "quantidade": 2,
+                        "precoUnitario": 19.90
+                    }
+                ],
+                "codPedido": 14,
+                "valorTotal": 200.00,
+                "CPF_vendedor": "11122233344"
+            },
+            {
+                "data": "2023-06-20",
+                "itens": [
+                    {
+                        "idProduto": 11,
+                        "quantidade": 2,
+                        "precoUnitario": 39.90
+                    }
+                ],
+                "codPedido": 22,
+                "valorTotal": 89.90,
+                "CPF_vendedor": "11122233344"
+            }
+        ],
+        "dataNasc": "1992-02-10",
+        "endereco": {
+            "UF": "BA",
+            "CEP": "11111111",
+            "bairro": "Bairro A",
+            "cidade": "Salvador",
+            "numero": "1",
+            "logradouro": "Rua A"
+        },
+        "telefones": [
+            "11999999993"
+        ]
+    },
+    {
+        "_id": "22222222222",
+        "nome": "Ana Paula",
+        "email": "ana@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-04",
+                "itens": [
+                    {
+                        "idProduto": 4,
+                        "quantidade": 2,
+                        "precoUnitario": 19.90
+                    }
+                ],
+                "codPedido": 4,
+                "valorTotal": 39.80,
+                "CPF_vendedor": "44455566677"
+            },
+            {
+                "data": "2023-04-10",
+                "itens": [
+                    {
+                        "idProduto": 5,
+                        "quantidade": 1,
+                        "precoUnitario": 39.90
+                    }
+                ],
+                "codPedido": 15,
+                "valorTotal": 90.00,
+                "CPF_vendedor": "33344455566"
+            },
+            {
+                "data": "2023-11-05",
+                "itens": [
+                    {
+                        "idProduto": 12,
+                        "quantidade": 1,
+                        "precoUnitario": 79.90
+                    }
+                ],
+                "codPedido": 23,
+                "valorTotal": 75.00,
+                "CPF_vendedor": "11122233344"
+            },
+            {
+                "data": "2023-03-15",
+                "itens": [
+                    {
+                        "idProduto": 13,
+                        "quantidade": 1,
+                        "precoUnitario": 25.00
+                    }
+                ],
+                "codPedido": 24,
+                "valorTotal": 139.80,
+                "CPF_vendedor": "11122233344"
+            }
+        ],
+        "dataNasc": "1980-11-30",
+        "endereco": {
+            "UF": "CE",
+            "CEP": "22222222",
+            "bairro": "Bairro B",
+            "cidade": "Fortaleza",
+            "numero": "2",
+            "logradouro": "Rua B"
+        },
+        "telefones": [
+            "11999999994"
+        ]
+    },
+    {
+        "_id": "33333333333",
+        "nome": "Bruno Costa",
+        "email": "bruno@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-05",
+                "itens": [
+                    {
+                        "idProduto": 5,
+                        "quantidade": 3,
+                        "precoUnitario": 39.90
+                    }
+                ],
+                "codPedido": 5,
+                "valorTotal": 119.80,
+                "CPF_vendedor": "55566677788"
+            },
+            {
+                "data": "2023-05-05",
+                "itens": [
+                    {
+                        "idProduto": 6,
+                        "quantidade": 2,
+                        "precoUnitario": 15.90
+                    }
+                ],
+                "codPedido": 16,
+                "valorTotal": 120.00,
+                "CPF_vendedor": "44455566677"
+            }
+        ],
+        "dataNasc": "1975-07-18",
+        "endereco": {
+            "UF": "MG",
+            "CEP": "33333333",
+            "bairro": "Bairro C",
+            "cidade": "Belo Horizonte",
+            "numero": "3",
+            "logradouro": "Rua C"
+        },
+        "telefones": [
+            "11999999995"
+        ]
+    },
+    {
+        "_id": "44444444444",
+        "nome": "Lucia Alves",
+        "email": "lucia@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-06",
+                "itens": [
+                    {
+                        "idProduto": 6,
+                        "quantidade": 2,
+                        "precoUnitario": 29.95
+                    }
+                ],
+                "codPedido": 6,
+                "valorTotal": 59.90,
+                "CPF_vendedor": "66677788899"
+            },
+            {
+                "data": "2023-06-25",
+                "itens": [
+                    {
+                        "idProduto": 7,
+                        "quantidade": 1,
+                        "precoUnitario": 59.90
+                    }
+                ],
+                "codPedido": 17,
+                "valorTotal": 65.00,
+                "CPF_vendedor": "55566677788"
+            }
+        ],
+        "dataNasc": "1999-09-09",
+        "endereco": {
+            "UF": "RS",
+            "CEP": "44444444",
+            "bairro": "Bairro D",
+            "cidade": "Porto Alegre",
+            "numero": "4",
+            "logradouro": "Rua D"
+        },
+        "telefones": [
+            "11999999996"
+        ]
+    },
+    {
+        "_id": "55555555555",
+        "nome": "Pedro Rocha",
+        "email": "pedro@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-07",
+                "itens": [
+                    {
+                        "idProduto": 7,
+                        "quantidade": 1,
+                        "precoUnitario": 59.90
+                    }
+                ],
+                "codPedido": 7,
+                "valorTotal": 75.00,
+                "CPF_vendedor": "77788899900"
+            },
+            {
+                "data": "2023-07-12",
+                "itens": [
+                    {
+                        "idProduto": 8,
+                        "quantidade": 1,
+                        "precoUnitario": 99.90
+                    }
+                ],
+                "codPedido": 18,
+                "valorTotal": 180.00,
+                "CPF_vendedor": "66677788899"
+            }
+        ],
+        "dataNasc": "2000-01-01",
+        "endereco": {
+            "UF": "PR",
+            "CEP": "55555555",
+            "bairro": "Bairro E",
+            "cidade": "Curitiba",
+            "numero": "5",
+            "logradouro": "Rua E"
+        },
+        "telefones": [
+            "11999999997"
+        ]
+    },
+    {
+        "_id": "66666666666",
+        "nome": "Sofia Martins",
+        "email": "sofia@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-08",
+                "itens": [
+                    {
+                        "idProduto": 8,
+                        "quantidade": 1,
+                        "precoUnitario": 99.90
+                    }
+                ],
+                "codPedido": 8,
+                "valorTotal": 89.90,
+                "CPF_vendedor": "88899900011"
+            },
+            {
+                "data": "2023-08-01",
+                "itens": [
+                    {
+                        "idProduto": 9,
+                        "quantidade": 3,
+                        "precoUnitario": 9.90
+                    }
+                ],
+                "codPedido": 19,
+                "valorTotal": 40.00,
+                "CPF_vendedor": "77788899900"
+            }
+        ],
+        "dataNasc": "1994-03-03",
+        "endereco": {
+            "UF": "SC",
+            "CEP": "66666666",
+            "bairro": "Bairro F",
+            "cidade": "Florianópolis",
+            "numero": "6",
+            "logradouro": "Rua F"
+        },
+        "telefones": [
+            "11999999998"
+        ]
+    },
+    {
+        "_id": "77777777777",
+        "nome": "Marcos Lima",
+        "email": "marcos@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-09",
+                "itens": [
+                    {
+                        "idProduto": 9,
+                        "quantidade": 2,
+                        "precoUnitario": 9.90
+                    }
+                ],
+                "codPedido": 9,
+                "valorTotal": 129.80,
+                "CPF_vendedor": "99900011122"
+            },
+            {
+                "data": "2023-09-18",
+                "itens": [
+                    {
+                        "idProduto": 10,
+                        "quantidade": 1,
+                        "precoUnitario": 89.90
+                    }
+                ],
+                "codPedido": 20,
+                "valorTotal": 110.00,
+                "CPF_vendedor": "88899900011"
+            }
+        ],
+        "dataNasc": "1988-12-12",
+        "endereco": {
+            "UF": "AM",
+            "CEP": "77777777",
+            "bairro": "Bairro G",
+            "cidade": "Manaus",
+            "numero": "7",
+            "logradouro": "Rua G"
+        },
+        "telefones": [
+            "11999999999"
+        ]
+    },
+    {
+        "_id": "88888888888",
+        "nome": "Juliana Faria",
+        "email": "juliana@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-10",
+                "itens": [
+                    {
+                        "idProduto": 10,
+                        "quantidade": 1,
+                        "precoUnitario": 89.90
+                    }
+                ],
+                "codPedido": 10,
+                "valorTotal": 49.90,
+                "CPF_vendedor": "00011122233"
+            },
+            {
+                "data": "2023-10-03",
+                "itens": [
+                    {
+                        "idProduto": 1,
+                        "quantidade": 5,
+                        "precoUnitario": 29.90
+                    }
+                ],
+                "codPedido": 21,
+                "valorTotal": 250.00,
+                "CPF_vendedor": "99900011122"
+            }
+        ],
+        "dataNasc": "1991-06-06",
+        "endereco": {
+            "UF": "PA",
+            "CEP": "88888888",
+            "bairro": "Bairro H",
+            "cidade": "Belém",
+            "numero": "8",
+            "logradouro": "Rua H"
+        },
+        "telefones": [
+            "11999999990"
+        ]
+    },
+    {
+        "_id": "11111111112",
+        "nome": "Ana Souza",
+        "email": "ana@email.com",
+        "pedidos": null,
+        "dataNasc": "1990-05-20",
+        "endereco": {
+            "UF": "BA",
+            "CEP": "40000000",
+            "bairro": "Pituba",
+            "cidade": "Salvador",
+            "numero": "321",
+            "logradouro": "Rua do Sol"
+        },
+        "telefones": null
+    },
+    {
+        "_id": "22222222224",
+        "nome": "João Pedro",
+        "email": "joao@email.com",
+        "pedidos": null,
+        "dataNasc": "1988-09-15",
+        "endereco": {
+            "UF": "RJ",
+            "CEP": "20000000",
+            "bairro": "Copacabana",
+            "cidade": "Rio de Janeiro",
+            "numero": "55",
+            "logradouro": "Av Atlântica"
+        },
+        "telefones": null
+    },
+    {
+        "_id": "01234567890",
+        "nome": "Novo Cliente Teste",
+        "email": "novo.teste@email.com",
+        "pedidos": [
+            {
+                "data": "2025-07-02",
+                "itens": [
+                    {
+                        "idProduto": 1,
+                        "quantidade": 5,
+                        "precoUnitario": 29.90
+                    },
+                    {
+                        "idProduto": 2,
+                        "quantidade": 3,
+                        "precoUnitario": 49.90
+                    },
+                    {
+                        "idProduto": 3,
+                        "quantidade": 1,
+                        "precoUnitario": 89.90
+                    }
+                ],
+                "codPedido": 11,
+                "valorTotal": 349.50,
+                "CPF_vendedor": "11122233344"
+            }
+        ],
+        "dataNasc": "1990-01-01",
+        "endereco": {
+            "UF": "SP",
+            "CEP": "12345678",
+            "bairro": "Centro",
+            "cidade": "São Paulo",
+            "numero": "123",
+            "logradouro": "Rua das Flores"
+        },
+        "telefones": [
+            "11999999980"
+        ]
+    }
+]);
+
+db.fornecedor.insertMany([
+    {
+        "_id": "12345678000199",
+        "nome": "Fornecedor A",
+        "email": "fornecedorA@email.com",
+        "endereco": {
+            "UF": "SP",
+            "CEP": "12345678",
+            "bairro": "Centro",
+            "cidade": "São Paulo",
+            "numero": "123",
+            "logradouro": "Rua das Flores"
+        },
+        "telefones": [
+            {
+                "numero": "1133330001"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-01",
+                "valor": 15.50,
+                "idProduto": 1,
+                "quantidade": 100
+            },
+            {
+                "data": "2025-06-01",
+                "valor": 20.00,
+                "idProduto": 11,
+                "quantidade": 50
+            }
+        ]
+    },
+    {
+        "_id": "22345678000199",
+        "nome": "Fornecedor B",
+        "email": "fornecedorB@email.com",
+        "endereco": {
+            "UF": "RJ",
+            "CEP": "87654321",
+            "bairro": "Jardins",
+            "cidade": "Rio de Janeiro",
+            "numero": "456",
+            "logradouro": "Av. Brasil"
+        },
+        "telefones": [
+            {
+                "numero": "1133330002"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-02",
+                "valor": 20.00,
+                "idProduto": 2,
+                "quantidade": 50
+            },
+            {
+                "data": "2025-06-02",
+                "valor": 45.00,
+                "idProduto": 12,
+                "quantidade": 30
+            }
+        ]
+    },
+    {
+        "_id": "32345678000199",
+        "nome": "Fornecedor C",
+        "email": "fornecedorC@email.com",
+        "endereco": {
+            "UF": "BA",
+            "CEP": "11111111",
+            "bairro": "Bairro A",
+            "cidade": "Salvador",
+            "numero": "1",
+            "logradouro": "Rua A"
+        },
+        "telefones": [
+            {
+                "numero": "1133330003"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-03",
+                "valor": 40.00,
+                "idProduto": 3,
+                "quantidade": 30
+            },
+            {
+                "data": "2025-06-03",
+                "valor": 12.00,
+                "idProduto": 13,
+                "quantidade": 100
+            }
+        ]
+    },
+    {
+        "_id": "42345678000199",
+        "nome": "Fornecedor D",
+        "email": "fornecedorD@email.com",
+        "endereco": {
+            "UF": "CE",
+            "CEP": "22222222",
+            "bairro": "Bairro B",
+            "cidade": "Fortaleza",
+            "numero": "2",
+            "logradouro": "Rua B"
+        },
+        "telefones": [
+            {
+                "numero": "1133330004"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-04",
+                "valor": 10.00,
+                "idProduto": 4,
+                "quantidade": 200
+            },
+            {
+                "data": "2025-06-04",
+                "valor": 50.00,
+                "idProduto": 14,
+                "quantidade": 25
+            }
+        ]
+    },
+    {
+        "_id": "52345678000199",
+        "nome": "Fornecedor E",
+        "email": "fornecedorE@email.com",
+        "endereco": {
+            "UF": "MG",
+            "CEP": "33333333",
+            "bairro": "Bairro C",
+            "cidade": "Belo Horizonte",
+            "numero": "3",
+            "logradouro": "Rua C"
+        },
+        "telefones": [
+            {
+                "numero": "1133330005"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-05",
+                "valor": 25.00,
+                "idProduto": 5,
+                "quantidade": 60
+            },
+            {
+                "data": "2025-06-05",
+                "valor": 6.00,
+                "idProduto": 15,
+                "quantidade": 20
+            }
+        ]
+    },
+    {
+        "_id": "62345678000199",
+        "nome": "Fornecedor F",
+        "email": "fornecedorF@email.com",
+        "endereco": {
+            "UF": "RS",
+            "CEP": "44444444",
+            "bairro": "Bairro D",
+            "cidade": "Porto Alegre",
+            "numero": "4",
+            "logradouro": "Rua D"
+        },
+        "telefones": [
+            {
+                "numero": "1133330006"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-06",
+                "valor": 8.00,
+                "idProduto": 6,
+                "quantidade": 70
+            },
+            {
+                "data": "2025-06-06",
+                "valor": 25.00,
+                "idProduto": 16,
+                "quantidade": 15
+            }
+        ]
+    },
+    {
+        "_id": "72345678000199",
+        "nome": "Fornecedor G",
+        "email": "fornecedorG@email.com",
+        "endereco": {
+            "UF": "PR",
+            "CEP": "55555555",
+            "bairro": "Bairro E",
+            "cidade": "Curitiba",
+            "numero": "5",
+            "logradouro": "Rua E"
+        },
+        "telefones": [
+            {
+                "numero": "1133330007"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-07",
+                "valor": 30.00,
+                "idProduto": 7,
+                "quantidade": 20
+            }
+        ]
+    },
+    {
+        "_id": "82345678000199",
+        "nome": "Fornecedor H",
+        "email": "fornecedorH@email.com",
+        "endereco": {
+            "UF": "SC",
+            "CEP": "66666666",
+            "bairro": "Bairro F",
+            "cidade": "Florianópolis",
+            "numero": "6",
+            "logradouro": "Rua F"
+        },
+        "telefones": [
+            {
+                "numero": "1133330008"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-08",
+                "valor": 50.00,
+                "idProduto": 8,
+                "quantidade": 10
+            }
+        ]
+    },
+    {
+        "_id": "92345678000199",
+        "nome": "Fornecedor I",
+        "email": "fornecedorI@email.com",
+        "endereco": {
+            "UF": "AM",
+            "CEP": "77777777",
+            "bairro": "Bairro G",
+            "cidade": "Manaus",
+            "numero": "7",
+            "logradouro": "Rua G"
+        },
+        "telefones": [
+            {
+                "numero": "1133330009"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-09",
+                "valor": 5.00,
+                "idProduto": 9,
+                "quantidade": 90
+            }
+        ]
+    },
+    {
+        "_id": "10345678000199",
+        "nome": "Fornecedor J",
+        "email": "fornecedorJ@email.com",
+        "endereco": {
+            "UF": "PA",
+            "CEP": "88888888",
+            "bairro": "Bairro H",
+            "cidade": "Belém",
+            "numero": "8",
+            "logradouro": "Rua H"
+        },
+        "telefones": [
+            {
+                "numero": "1133330010"
+            }
+        ],
+        "produtos_fornecidos": [
+            {
+                "data": "2025-06-10",
+                "valor": 45.00,
+                "idProduto": 10,
+                "quantidade": 15
+            }
+        ]
+    }
+]);
+
+db.produto.insertMany([
+    {
+        "_id": 1,
+        "cor": "Vermelho",
+        "nome": "Calcinha Renda",
+        "preco": 29.90,
+        "tamanho": "M",
+        "categoria": {
+            "id": 1,
+            "nome": "Lingerie"
+        },
+        "promocoes": [
+            {
+                "id": 1,
+                "descricao": "Promo Verão",
+                "dataInicio": "2025-01-01",
+                "dataTermino": "2025-01-31",
+                "percentualDesconto": 0.10
+            }
+        ],
+        "qtdMinima": 10,
+        "qtdEstoque": 50
+    },
+    {
+        "_id": 2,
+        "cor": "Azul",
+        "nome": "Pijama Algodão",
+        "preco": 49.90,
+        "tamanho": "G",
+        "categoria": {
+            "id": 2,
+            "nome": "Pijamas"
+        },
+        "promocoes": [
+            {
+                "id": 2,
+                "descricao": "Promo Inverno",
+                "dataInicio": "2025-06-01",
+                "dataTermino": "2025-06-30",
+                "percentualDesconto": 0.15
+            }
+        ],
+        "qtdMinima": 5,
+        "qtdEstoque": 30
+    },
+    {
+        "_id": 3,
+        "cor": "Rosa",
+        "nome": "Camisola Seda",
+        "preco": 89.90,
+        "tamanho": "P",
+        "categoria": {
+            "id": 3,
+            "nome": "Camisolas"
+        },
+        "promocoes": [
+            {
+                "id": 3,
+                "descricao": "Black Friday",
+                "dataInicio": "2025-11-25",
+                "dataTermino": "2025-11-28",
+                "percentualDesconto": 0.30
+            }
+        ],
+        "qtdMinima": 3,
+        "qtdEstoque": 20
+    },
+    {
+        "_id": 4,
+        "cor": "Preto",
+        "nome": "Cueca Boxer",
+        "preco": 19.90,
+        "tamanho": "M",
+        "categoria": {
+            "id": 4,
+            "nome": "Boxers"
+        },
+        "promocoes": [
+            {
+                "id": 4,
+                "descricao": "Natal",
+                "dataInicio": "2025-12-10",
+                "dataTermino": "2025-12-25",
+                "percentualDesconto": 0.25
+            }
+        ],
+        "qtdMinima": 20,
+        "qtdEstoque": 100
+    },
+    {
+        "_id": 5,
+        "cor": "Branco",
+        "nome": "Sutiã Comfort",
+        "preco": 39.90,
+        "tamanho": "G",
+        "categoria": {
+            "id": 5,
+            "nome": "Sutiãs"
+        },
+        "promocoes": [
+            {
+                "id": 5,
+                "descricao": "Outubro Rosa",
+                "dataInicio": "2025-10-01",
+                "dataTermino": "2025-10-31",
+                "percentualDesconto": 0.20
+            }
+        ],
+        "qtdMinima": 8,
+        "qtdEstoque": 40
+    },
+    {
+        "_id": 6,
+        "cor": "Cinza",
+        "nome": "Cueca Slip",
+        "preco": 15.90,
+        "tamanho": "M",
+        "categoria": {
+            "id": 6,
+            "nome": "Cuecas"
+        },
+        "promocoes": [
+            {
+                "id": 6,
+                "descricao": "Janeiro Branco",
+                "dataInicio": "2025-01-01",
+                "dataTermino": "2025-01-15",
+                "percentualDesconto": 0.05
+            }
+        ],
+        "qtdMinima": 15,
+        "qtdEstoque": 80
+    },
+    {
+        "_id": 7,
+        "cor": "Roxo",
+        "nome": "Robe Cetim",
+        "preco": 59.90,
+        "tamanho": "U",
+        "categoria": {
+            "id": 7,
+            "nome": "Robes"
+        },
+        "promocoes": [
+            {
+                "id": 7,
+                "descricao": "Aniversário Loja",
+                "dataInicio": "2025-03-01",
+                "dataTermino": "2025-03-05",
+                "percentualDesconto": 0.40
+            }
+        ],
+        "qtdMinima": 4,
+        "qtdEstoque": 15
+    },
+    {
+        "_id": 8,
+        "cor": "Bordô",
+        "nome": "Conjunto Luxo",
+        "preco": 99.90,
+        "tamanho": "M",
+        "categoria": {
+            "id": 8,
+            "nome": "Conjuntos"
+        },
+        "promocoes": [
+            {
+                "id": 8,
+                "descricao": "Semana do Cliente",
+                "dataInicio": "2025-09-15",
+                "dataTermino": "2025-09-20",
+                "percentualDesconto": 0.18
+            }
+        ],
+        "qtdMinima": 3,
+        "qtdEstoque": 12
+    },
+    {
+        "_id": 9,
+        "cor": "Bege",
+        "nome": "Meia Calça",
+        "preco": 9.90,
+        "tamanho": "U",
+        "categoria": {
+            "id": 9,
+            "nome": "Meias"
+        },
+        "promocoes": [
+            {
+                "id": 9,
+                "descricao": "Dia das Mães",
+                "dataInicio": "2025-05-01",
+                "dataTermino": "2025-05-10",
+                "percentualDesconto": 0.22
+            }
+        ],
+        "qtdMinima": 10,
+        "qtdEstoque": 60
+    },
+    {
+        "_id": 10,
+        "cor": "Preto",
+        "nome": "Cinta Modeladora",
+        "preco": 89.90,
+        "tamanho": "G",
+        "categoria": {
+            "id": 10,
+            "nome": "Acessórios"
+        },
+        "promocoes": [
+            {
+                "id": 10,
+                "descricao": "Volta às Aulas",
+                "dataInicio": "2025-02-01",
+                "dataTermino": "2025-02-10",
+                "percentualDesconto": 0.08
+            }
+        ],
+        "qtdMinima": 2,
+        "qtdEstoque": 10
+    },
+    {
+        "_id": 11,
+        "cor": "Rosa",
+        "nome": "Sutiã Floral",
+        "preco": 39.90,
+        "tamanho": "G",
+        "categoria": {
+            "id": 5,
+            "nome": "Sutiãs"
+        },
+        "promocoes": [
+            {
+                "id": 11,
+                "descricao": "Promo Primavera",
+                "dataInicio": "2025-01-01",
+                "dataTermino": "2025-12-31",
+                "percentualDesconto": 0.15
+            }
+        ],
+        "qtdMinima": 10,
+        "qtdEstoque": 20
+    },
+    {
+        "_id": 12,
+        "cor": "Preto",
+        "nome": "Pijama Luxo",
+        "preco": 79.90,
+        "tamanho": "M",
+        "categoria": {
+            "id": 2,
+            "nome": "Pijamas"
+        },
+        "promocoes": [
+            {
+                "id": 11,
+                "descricao": "Promo Primavera",
+                "dataInicio": "2025-01-01",
+                "dataTermino": "2025-12-31",
+                "percentualDesconto": 0.15
+            }
+        ],
+        "qtdMinima": 5,
+        "qtdEstoque": 15
+    },
+    {
+        "_id": 13,
+        "cor": "Azul",
+        "nome": "Cueca Boxer Sport",
+        "preco": 30.00,
+        "tamanho": "M",
+        "categoria": {
+            "id": 4,
+            "nome": "Boxers"
+        },
+        "promocoes": [
+            {
+                "id": 3,
+                "descricao": "Black Friday",
+                "dataInicio": "2025-11-25",
+                "dataTermino": "2025-11-28",
+                "percentualDesconto": 0.30
+            }
+        ],
+        "qtdMinima": 25,
+        "qtdEstoque": 35
+    },
+    {
+        "_id": 14,
+        "cor": "Vinho",
+        "nome": "Camisola Renda",
+        "preco": 99.90,
+        "tamanho": "P",
+        "categoria": {
+            "id": 3,
+            "nome": "Camisolas"
+        },
+        "promocoes": [
+            {
+                "id": 11,
+                "descricao": "Promo Primavera",
+                "dataInicio": "2025-01-01",
+                "dataTermino": "2025-12-31",
+                "percentualDesconto": 0.15
+            }
+        ],
+        "qtdMinima": 8,
+        "qtdEstoque": 20
+    },
+    {
+        "_id": 15,
+        "cor": "Branca",
+        "nome": "Meia Esportiva",
+        "preco": 12.00,
+        "tamanho": "U",
+        "categoria": {
+            "id": 9,
+            "nome": "Meias"
+        },
+        "promocoes": [
+            {
+                "id": 12,
+                "descricao": "Queima de Estoque",
+                "dataInicio": "2023-01-01",
+                "dataTermino": "2023-12-31",
+                "percentualDesconto": 0.20
+            }
+        ],
+        "qtdMinima": 10,
+        "qtdEstoque": 5
+    },
+    {
+        "_id": 16,
+        "cor": "Verde",
+        "nome": "Top Cropped",
+        "preco": 45.00,
+        "tamanho": "P",
+        "categoria": {
+            "id": 1,
+            "nome": "Lingerie"
+        },
+        "promocoes": null,
+        "qtdMinima": 15,
+        "qtdEstoque": 7
+    }
+]);
+
+db.vendedor.insertMany([
+    {
+        "_id": "11122233344",
+        "nome": "Carlos Lima",
+        "email": "carlos@email.com",
+        "dataNasc": "1982-03-10",
+        "endereco": {
+            "UF": "SP",
+            "CEP": "12345678",
+            "bairro": "Centro",
+            "cidade": "São Paulo",
+            "numero": "123",
+            "logradouro": "Rua das Flores"
+        },
+        "telefones": [
+            {
+                "numero": "1191110001"
+            }
+        ]
+    },
+    {
+        "_id": "22233344455",
+        "nome": "Marina Reis",
+        "email": "marina@email.com",
+        "dataNasc": "1990-04-04",
+        "endereco": {
+            "UF": "RJ",
+            "CEP": "87654321",
+            "bairro": "Jardins",
+            "cidade": "Rio de Janeiro",
+            "numero": "456",
+            "logradouro": "Av. Brasil"
+        },
+        "telefones": [
+            {
+                "numero": "1191110002"
+            }
+        ]
+    },
+    {
+        "_id": "33344455566",
+        "nome": "Roberto Silva",
+        "email": "roberto@email.com",
+        "dataNasc": "1987-05-05",
+        "endereco": {
+            "UF": "BA",
+            "CEP": "11111111",
+            "bairro": "Bairro A",
+            "cidade": "Salvador",
+            "numero": "1",
+            "logradouro": "Rua A"
+        },
+        "telefones": [
+            {
+                "numero": "1191110003"
+            }
+        ]
+    },
+    {
+        "_id": "44455566677",
+        "nome": "Larissa Souza",
+        "email": "larissa@email.com",
+        "dataNasc": "1983-06-06",
+        "endereco": {
+            "UF": "CE",
+            "CEP": "22222222",
+            "bairro": "Bairro B",
+            "cidade": "Fortaleza",
+            "numero": "2",
+            "logradouro": "Rua B"
+        },
+        "telefones": [
+            {
+                "numero": "1191110004"
+            }
+        ]
+    },
+    {
+        "_id": "55566677788",
+        "nome": "Tiago Ramos",
+        "email": "tiago@email.com",
+        "dataNasc": "1995-07-07",
+        "endereco": {
+            "UF": "MG",
+            "CEP": "33333333",
+            "bairro": "Bairro C",
+            "cidade": "Belo Horizonte",
+            "numero": "3",
+            "logradouro": "Rua C"
+        },
+        "telefones": [
+            {
+                "numero": "1191110005"
+            }
+        ]
+    },
+    {
+        "_id": "66677788899",
+        "nome": "Bruna Dias",
+        "email": "bruna@email.com",
+        "dataNasc": "1991-08-08",
+        "endereco": {
+            "UF": "RS",
+            "CEP": "44444444",
+            "bairro": "Bairro D",
+            "cidade": "Porto Alegre",
+            "numero": "4",
+            "logradouro": "Rua D"
+        },
+        "telefones": [
+            {
+                "numero": "1191110006"
+            }
+        ]
+    },
+    {
+        "_id": "77788899900",
+        "nome": "Marcelo Alves",
+        "email": "marcelo@email.com",
+        "dataNasc": "1993-09-09",
+        "endereco": {
+            "UF": "PR",
+            "CEP": "55555555",
+            "bairro": "Bairro E",
+            "cidade": "Curitiba",
+            "numero": "5",
+            "logradouro": "Rua E"
+        },
+        "telefones": [
+            {
+                "numero": "1191110007"
+            }
+        ]
+    },
+    {
+        "_id": "88899900011",
+        "nome": "Patrícia Nogueira",
+        "email": "patricia@email.com",
+        "dataNasc": "1989-10-10",
+        "endereco": {
+            "UF": "SC",
+            "CEP": "66666666",
+            "bairro": "Bairro F",
+            "cidade": "Florianópolis",
+            "numero": "6",
+            "logradouro": "Rua F"
+        },
+        "telefones": [
+            {
+                "numero": "1191110008"
+            }
+        ]
+    },
+    {
+        "_id": "99900011122",
+        "nome": "Fernando Campos",
+        "email": "fernando@email.com",
+        "dataNasc": "1994-11-11",
+        "endereco": {
+            "UF": "AM",
+            "CEP": "77777777",
+            "bairro": "Bairro G",
+            "cidade": "Manaus",
+            "numero": "7",
+            "logradouro": "Rua G"
+        },
+        "telefones": [
+            {
+                "numero": "1191110009"
+            }
+        ]
+    },
+    {
+        "_id": "00011122233",
+        "nome": "Isabela Freitas",
+        "email": "isabela@email.com",
+        "dataNasc": "1996-12-12",
+        "endereco": {
+            "UF": "PA",
+            "CEP": "88888888",
+            "bairro": "Bairro H",
+            "cidade": "Belém",
+            "numero": "8",
+            "logradouro": "Rua H"
+        },
+        "telefones": [
+            {
+                "numero": "1191110010"
+            }
+        ]
+    }
+]);

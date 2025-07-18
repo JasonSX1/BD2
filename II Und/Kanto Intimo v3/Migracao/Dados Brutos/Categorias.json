@@ -1,0 +1,43 @@
+db.categoria.drop();
+db.categoria.insertMany([
+    {
+        "_id": 1,
+        "nome": "Lingerie"
+    },
+    {
+        "_id": 2,
+        "nome": "Pijamas"
+    },
+    {
+        "_id": 3,
+        "nome": "Camisolas"
+    },
+    {
+        "_id": 4,
+        "nome": "Boxers"
+    },
+    {
+        "_id": 5,
+        "nome": "Sutiãs"
+    },
+    {
+        "_id": 6,
+        "nome": "Cuecas"
+    },
+    {
+        "_id": 7,
+        "nome": "Robes"
+    },
+    {
+        "_id": 8,
+        "nome": "Conjuntos"
+    },
+    {
+        "_id": 9,
+        "nome": "Meias"
+    },
+    {
+        "_id": 10,
+        "nome": "Acessórios"
+    }
+]);

@@ -1,17 +1,4 @@
 -- CONSULTA 1 ----------------------------------------------------------------------------------
--- Produtos mais vendidos em 2023
-SELECT 
-    p.idProduto,
-    p.nome AS produto,
-    SUM(pp.quantidadeProduto) AS total_vendido
-FROM Pedido_Produto pp
-JOIN Pedido pe ON pp.codPedido = pe.codPedido
-JOIN Produto p ON pp.idProduto = p.idProduto
-WHERE pe.data BETWEEN '2023-01-01' AND '2023-12-31'
-GROUP BY p.idProduto, p.nome
-ORDER BY total_vendido DESC;
-
--- CONSULTA 2 ----------------------------------------------------------------------------------
 -- Lucro bruto por categoria
 SELECT
     c.nome AS Categoria,
@@ -33,7 +20,7 @@ JOIN (
 GROUP BY c.nome
 ORDER BY LucroBruto DESC;
 
--- CONSULTA 3 ----------------------------------------------------------------------------------
+-- CONSULTA 2 ----------------------------------------------------------------------------------
 -- Faturamento e ticket médio por vendedor
 SELECT
     v.nome AS Vendedor,
@@ -45,7 +32,7 @@ JOIN Pedido p ON v.CPF = p.CPF_vendedor
 GROUP BY v.CPF, v.nome
 ORDER BY FaturamentoTotal DESC;
 
--- CONSULTA 4 ----------------------------------------------------------------------------------
+-- CONSULTA 3 ----------------------------------------------------------------------------------
 -- Clientes que compraram itens em promoção
 SELECT
     c.nome AS Cliente,
@@ -55,11 +42,11 @@ FROM Cliente c
 JOIN Pedido ped ON c.CPF = ped.CPF_cliente
 JOIN Pedido_Produto pp ON ped.codPedido = pp.codPedido
 JOIN Produto p ON pp.idProduto = p.idProduto
-WHERE p.idPromocao IS NOT NULL -- Filtra por produtos que têm alguma promoção associada
+JOIN Produto_Promocao ppromo ON p.idProduto = ppromo.idProduto
 GROUP BY c.CPF, c.nome, c.email
 ORDER BY ItensPromocionaisDistintosComprados DESC;
 
--- CONSULTA 5 ----------------------------------------------------------------------------------
+-- CONSULTA 4 ----------------------------------------------------------------------------------
 -- Produtos abaixo do estoque mínimo e que não estão em promoção ativa
 SELECT
     p.idProduto,
@@ -71,14 +58,12 @@ FROM Produto p
 WHERE
     p.qtdEstoque < p.qtdMinima AND
     p.idProduto NOT IN (
-        -- Subconsulta para encontrar produtos em promoções ativas
-        SELECT p2.idProduto
-        FROM Produto p2
-        JOIN Promocao promo ON p2.idPromocao = promo.ID
-        WHERE CURDATE() BETWEEN promo.dataInicio AND promo.dataTermino
+        SELECT ppromo.idProduto
+        FROM Produto_Promocao ppromo
+        WHERE CURDATE() BETWEEN ppromo.dataInicio AND ppromo.dataTermino
     );
 
--- CONSULTA 6 ----------------------------------------------------------------------------------
+-- CONSULTA 5 ----------------------------------------------------------------------------------
 -- Produtos mais vendidos em um período específico (ex: Julho de 2025)
 SELECT 
     p.idProduto,
