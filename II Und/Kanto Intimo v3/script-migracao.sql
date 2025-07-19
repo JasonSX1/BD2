@@ -85,9 +85,12 @@ SELECT
       "UF", e.UF
     ),
     "telefones", (
-      SELECT JSON_ARRAYAGG(JSON_OBJECT("numero", tf.telefone))
-      FROM telefones_forn tf
-      WHERE tf.CNPJ = f.CNPJ
+      SELECT JSON_ARRAYAGG(tf2.telefone)
+      FROM (
+        SELECT DISTINCT tf.telefone
+        FROM telefones_forn tf
+        WHERE tf.CNPJ = f.CNPJ
+      ) AS tf2
     ),
     "produtos_fornecidos", (
       SELECT JSON_ARRAYAGG(

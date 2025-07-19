@@ -2,6 +2,9 @@
 DROP DATABASE IF EXISTS kantointimo;
 CREATE DATABASE kantointimo;
 USE kantointimo;
+/* Esquema Lógico: */
+
+/* Esquema Lógico: */
 
 CREATE TABLE Cliente (
     CPF CHAR (11) PRIMARY KEY,
@@ -31,12 +34,12 @@ CREATE TABLE Pedido (
 
 CREATE TABLE Produto (
     idProduto INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    idCategoria INT UNSIGNED NOT NULL,
     nome VARCHAR(60) NOT NULL,
     tamanho VARCHAR(4) NOT NULL,
     cor VARCHAR(20) NOT NULL,
     preco DECIMAL(7,2) NOT NULL,
     qtdEstoque INT UNSIGNED NOT NULL,
-    idCategoria INT UNSIGNED NOT NULL,
     qtdMinima INT UNSIGNED NOT NULL
 );
 
@@ -122,6 +125,10 @@ ALTER TABLE Pedido ADD CONSTRAINT FK_Pedido_3
     FOREIGN KEY (CPF_vendedor)
     REFERENCES Vendedor (CPF)
     ON DELETE CASCADE;
+ 
+ALTER TABLE Produto ADD CONSTRAINT FK_Produto_2
+    FOREIGN KEY (idCategoria)
+    REFERENCES Categoria (ID);
  
 ALTER TABLE Fornecedor ADD CONSTRAINT FK_Fornecedor_2
     FOREIGN KEY (idEndereco)
