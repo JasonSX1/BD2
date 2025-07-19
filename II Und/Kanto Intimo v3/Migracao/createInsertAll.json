@@ -912,19 +912,14 @@ db.produto.insertMany([
         "nome": "Calcinha Renda",
         "preco": 29.90,
         "tamanho": "M",
-        "categoria": {
+        "promocao": {
             "id": 1,
-            "nome": "Lingerie"
+            "descricao": "Promo Verão",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-01-31",
+            "percentualDesconto": 0.10
         },
-        "promocoes": [
-            {
-                "id": 1,
-                "descricao": "Promo Verão",
-                "dataInicio": "2025-01-01",
-                "dataTermino": "2025-01-31",
-                "percentualDesconto": 0.10
-            }
-        ],
+        "categoria": "Lingerie",
         "qtdMinima": 10,
         "qtdEstoque": 50
     },
@@ -934,19 +929,14 @@ db.produto.insertMany([
         "nome": "Pijama Algodão",
         "preco": 49.90,
         "tamanho": "G",
-        "categoria": {
+        "promocao": {
             "id": 2,
-            "nome": "Pijamas"
+            "descricao": "Promo Inverno",
+            "dataInicio": "2025-06-01",
+            "dataTermino": "2025-06-30",
+            "percentualDesconto": 0.15
         },
-        "promocoes": [
-            {
-                "id": 2,
-                "descricao": "Promo Inverno",
-                "dataInicio": "2025-06-01",
-                "dataTermino": "2025-06-30",
-                "percentualDesconto": 0.15
-            }
-        ],
+        "categoria": "Pijamas",
         "qtdMinima": 5,
         "qtdEstoque": 30
     },
@@ -956,19 +946,14 @@ db.produto.insertMany([
         "nome": "Camisola Seda",
         "preco": 89.90,
         "tamanho": "P",
-        "categoria": {
+        "promocao": {
             "id": 3,
-            "nome": "Camisolas"
+            "descricao": "Black Friday",
+            "dataInicio": "2025-11-25",
+            "dataTermino": "2025-11-28",
+            "percentualDesconto": 0.30
         },
-        "promocoes": [
-            {
-                "id": 3,
-                "descricao": "Black Friday",
-                "dataInicio": "2025-11-25",
-                "dataTermino": "2025-11-28",
-                "percentualDesconto": 0.30
-            }
-        ],
+        "categoria": "Camisolas",
         "qtdMinima": 3,
         "qtdEstoque": 20
     },
@@ -978,19 +963,14 @@ db.produto.insertMany([
         "nome": "Cueca Boxer",
         "preco": 19.90,
         "tamanho": "M",
-        "categoria": {
+        "promocao": {
             "id": 4,
-            "nome": "Boxers"
+            "descricao": "Natal",
+            "dataInicio": "2025-12-10",
+            "dataTermino": "2025-12-25",
+            "percentualDesconto": 0.25
         },
-        "promocoes": [
-            {
-                "id": 4,
-                "descricao": "Natal",
-                "dataInicio": "2025-12-10",
-                "dataTermino": "2025-12-25",
-                "percentualDesconto": 0.25
-            }
-        ],
+        "categoria": "Boxers",
         "qtdMinima": 20,
         "qtdEstoque": 100
     },
@@ -1000,19 +980,14 @@ db.produto.insertMany([
         "nome": "Sutiã Comfort",
         "preco": 39.90,
         "tamanho": "G",
-        "categoria": {
+        "promocao": {
             "id": 5,
-            "nome": "Sutiãs"
+            "descricao": "Outubro Rosa",
+            "dataInicio": "2025-10-01",
+            "dataTermino": "2025-10-31",
+            "percentualDesconto": 0.20
         },
-        "promocoes": [
-            {
-                "id": 5,
-                "descricao": "Outubro Rosa",
-                "dataInicio": "2025-10-01",
-                "dataTermino": "2025-10-31",
-                "percentualDesconto": 0.20
-            }
-        ],
+        "categoria": "Sutiãs",
         "qtdMinima": 8,
         "qtdEstoque": 40
     },
@@ -1022,19 +997,14 @@ db.produto.insertMany([
         "nome": "Cueca Slip",
         "preco": 15.90,
         "tamanho": "M",
-        "categoria": {
+        "promocao": {
             "id": 6,
-            "nome": "Cuecas"
+            "descricao": "Janeiro Branco",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-01-15",
+            "percentualDesconto": 0.05
         },
-        "promocoes": [
-            {
-                "id": 6,
-                "descricao": "Janeiro Branco",
-                "dataInicio": "2025-01-01",
-                "dataTermino": "2025-01-15",
-                "percentualDesconto": 0.05
-            }
-        ],
+        "categoria": "Cuecas",
         "qtdMinima": 15,
         "qtdEstoque": 80
     },
@@ -1044,19 +1014,14 @@ db.produto.insertMany([
         "nome": "Robe Cetim",
         "preco": 59.90,
         "tamanho": "U",
-        "categoria": {
+        "promocao": {
             "id": 7,
-            "nome": "Robes"
+            "descricao": "Aniversário Loja",
+            "dataInicio": "2025-03-01",
+            "dataTermino": "2025-03-05",
+            "percentualDesconto": 0.40
         },
-        "promocoes": [
-            {
-                "id": 7,
-                "descricao": "Aniversário Loja",
-                "dataInicio": "2025-03-01",
-                "dataTermino": "2025-03-05",
-                "percentualDesconto": 0.40
-            }
-        ],
+        "categoria": "Robes",
         "qtdMinima": 4,
         "qtdEstoque": 15
     },
@@ -1066,19 +1031,14 @@ db.produto.insertMany([
         "nome": "Conjunto Luxo",
         "preco": 99.90,
         "tamanho": "M",
-        "categoria": {
+        "promocao": {
             "id": 8,
-            "nome": "Conjuntos"
+            "descricao": "Semana do Cliente",
+            "dataInicio": "2025-09-15",
+            "dataTermino": "2025-09-20",
+            "percentualDesconto": 0.18
         },
-        "promocoes": [
-            {
-                "id": 8,
-                "descricao": "Semana do Cliente",
-                "dataInicio": "2025-09-15",
-                "dataTermino": "2025-09-20",
-                "percentualDesconto": 0.18
-            }
-        ],
+        "categoria": "Conjuntos",
         "qtdMinima": 3,
         "qtdEstoque": 12
     },
@@ -1088,19 +1048,14 @@ db.produto.insertMany([
         "nome": "Meia Calça",
         "preco": 9.90,
         "tamanho": "U",
-        "categoria": {
+        "promocao": {
             "id": 9,
-            "nome": "Meias"
+            "descricao": "Dia das Mães",
+            "dataInicio": "2025-05-01",
+            "dataTermino": "2025-05-10",
+            "percentualDesconto": 0.22
         },
-        "promocoes": [
-            {
-                "id": 9,
-                "descricao": "Dia das Mães",
-                "dataInicio": "2025-05-01",
-                "dataTermino": "2025-05-10",
-                "percentualDesconto": 0.22
-            }
-        ],
+        "categoria": "Meias",
         "qtdMinima": 10,
         "qtdEstoque": 60
     },
@@ -1110,19 +1065,14 @@ db.produto.insertMany([
         "nome": "Cinta Modeladora",
         "preco": 89.90,
         "tamanho": "G",
-        "categoria": {
+        "promocao": {
             "id": 10,
-            "nome": "Acessórios"
+            "descricao": "Volta às Aulas",
+            "dataInicio": "2025-02-01",
+            "dataTermino": "2025-02-10",
+            "percentualDesconto": 0.08
         },
-        "promocoes": [
-            {
-                "id": 10,
-                "descricao": "Volta às Aulas",
-                "dataInicio": "2025-02-01",
-                "dataTermino": "2025-02-10",
-                "percentualDesconto": 0.08
-            }
-        ],
+        "categoria": "Acessórios",
         "qtdMinima": 2,
         "qtdEstoque": 10
     },
@@ -1132,19 +1082,14 @@ db.produto.insertMany([
         "nome": "Sutiã Floral",
         "preco": 39.90,
         "tamanho": "G",
-        "categoria": {
-            "id": 5,
-            "nome": "Sutiãs"
+        "promocao": {
+            "id": 11,
+            "descricao": "Promo Primavera",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-12-31",
+            "percentualDesconto": 0.15
         },
-        "promocoes": [
-            {
-                "id": 11,
-                "descricao": "Promo Primavera",
-                "dataInicio": "2025-01-01",
-                "dataTermino": "2025-12-31",
-                "percentualDesconto": 0.15
-            }
-        ],
+        "categoria": "Sutiãs",
         "qtdMinima": 10,
         "qtdEstoque": 20
     },
@@ -1154,19 +1099,14 @@ db.produto.insertMany([
         "nome": "Pijama Luxo",
         "preco": 79.90,
         "tamanho": "M",
-        "categoria": {
-            "id": 2,
-            "nome": "Pijamas"
+        "promocao": {
+            "id": 11,
+            "descricao": "Promo Primavera",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-12-31",
+            "percentualDesconto": 0.15
         },
-        "promocoes": [
-            {
-                "id": 11,
-                "descricao": "Promo Primavera",
-                "dataInicio": "2025-01-01",
-                "dataTermino": "2025-12-31",
-                "percentualDesconto": 0.15
-            }
-        ],
+        "categoria": "Pijamas",
         "qtdMinima": 5,
         "qtdEstoque": 15
     },
@@ -1176,19 +1116,14 @@ db.produto.insertMany([
         "nome": "Cueca Boxer Sport",
         "preco": 30.00,
         "tamanho": "M",
-        "categoria": {
-            "id": 4,
-            "nome": "Boxers"
+        "promocao": {
+            "id": 3,
+            "descricao": "Black Friday",
+            "dataInicio": "2025-11-25",
+            "dataTermino": "2025-11-28",
+            "percentualDesconto": 0.30
         },
-        "promocoes": [
-            {
-                "id": 3,
-                "descricao": "Black Friday",
-                "dataInicio": "2025-11-25",
-                "dataTermino": "2025-11-28",
-                "percentualDesconto": 0.30
-            }
-        ],
+        "categoria": "Boxers",
         "qtdMinima": 25,
         "qtdEstoque": 35
     },
@@ -1198,19 +1133,14 @@ db.produto.insertMany([
         "nome": "Camisola Renda",
         "preco": 99.90,
         "tamanho": "P",
-        "categoria": {
-            "id": 3,
-            "nome": "Camisolas"
+        "promocao": {
+            "id": 11,
+            "descricao": "Promo Primavera",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-12-31",
+            "percentualDesconto": 0.15
         },
-        "promocoes": [
-            {
-                "id": 11,
-                "descricao": "Promo Primavera",
-                "dataInicio": "2025-01-01",
-                "dataTermino": "2025-12-31",
-                "percentualDesconto": 0.15
-            }
-        ],
+        "categoria": "Camisolas",
         "qtdMinima": 8,
         "qtdEstoque": 20
     },
@@ -1220,19 +1150,14 @@ db.produto.insertMany([
         "nome": "Meia Esportiva",
         "preco": 12.00,
         "tamanho": "U",
-        "categoria": {
-            "id": 9,
-            "nome": "Meias"
+        "promocao": {
+            "id": 12,
+            "descricao": "Queima de Estoque",
+            "dataInicio": "2023-01-01",
+            "dataTermino": "2023-12-31",
+            "percentualDesconto": 0.20
         },
-        "promocoes": [
-            {
-                "id": 12,
-                "descricao": "Queima de Estoque",
-                "dataInicio": "2023-01-01",
-                "dataTermino": "2023-12-31",
-                "percentualDesconto": 0.20
-            }
-        ],
+        "categoria": "Meias",
         "qtdMinima": 10,
         "qtdEstoque": 5
     },
@@ -1242,11 +1167,14 @@ db.produto.insertMany([
         "nome": "Top Cropped",
         "preco": 45.00,
         "tamanho": "P",
-        "categoria": {
-            "id": 1,
-            "nome": "Lingerie"
+        "promocao": {
+            "id": null,
+            "descricao": null,
+            "dataInicio": null,
+            "dataTermino": null,
+            "percentualDesconto": null
         },
-        "promocoes": null,
+        "categoria": "Lingerie",
         "qtdMinima": 15,
         "qtdEstoque": 7
     }

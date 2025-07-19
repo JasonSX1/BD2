@@ -118,23 +118,19 @@ SELECT
     "preco", p.preco,
     "qtdEstoque", p.qtdEstoque,
     "qtdMinima", p.qtdMinima,
-    
-    "categoria", JSON_OBJECT(
-      "id", c.ID,
-      "nome", c.nome
-    ),
 
-    "promocao", (
-      SELECT JSON_OBJECT(
-        "id", pr.ID,
-        "descricao", pr.descricao,
-        "dataInicio", pr.dataInicio,
-        "dataTermino", pr.dataTermino,
-        "percentualDesconto", pr.percentualDesconto
-      )
-      FROM Promocao pr
-      WHERE pr.ID = p.idPromocao
+    "categoria", c.nome,
+
+    "promocao", JSON_OBJECT(
+      "id", pr.ID,
+      "descricao", pr.descricao,
+      "dataInicio", pp.dataInicio,
+      "dataTermino", pp.dataTermino,
+      "percentualDesconto", pr.percentualDesconto
     )
   ) AS JSON
 FROM Produto p
-JOIN Categoria c ON p.idCategoria = c.ID;
+JOIN Categoria c ON p.idCategoria = c.ID
+LEFT JOIN Produto_Promocao pp ON pp.idProduto = p.idProduto
+LEFT JOIN Promocao pr ON pr.ID = pp.idPromocao
+LIMIT 0, 1000;

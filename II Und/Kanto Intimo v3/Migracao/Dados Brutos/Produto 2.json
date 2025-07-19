@@ -1,0 +1,275 @@
+db.produto.drop();
+db.produto.insertMany([
+    {
+        "_id": 1,
+        "cor": "Vermelho",
+        "nome": "Calcinha Renda",
+        "preco": 29.90,
+        "tamanho": "M",
+        "promocao": {
+            "id": 1,
+            "descricao": "Promo Verão",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-01-31",
+            "percentualDesconto": 0.10
+        },
+        "categoria": "Lingerie",
+        "qtdMinima": 10,
+        "qtdEstoque": 50
+    },
+    {
+        "_id": 2,
+        "cor": "Azul",
+        "nome": "Pijama Algodão",
+        "preco": 49.90,
+        "tamanho": "G",
+        "promocao": {
+            "id": 2,
+            "descricao": "Promo Inverno",
+            "dataInicio": "2025-06-01",
+            "dataTermino": "2025-06-30",
+            "percentualDesconto": 0.15
+        },
+        "categoria": "Pijamas",
+        "qtdMinima": 5,
+        "qtdEstoque": 30
+    },
+    {
+        "_id": 3,
+        "cor": "Rosa",
+        "nome": "Camisola Seda",
+        "preco": 89.90,
+        "tamanho": "P",
+        "promocao": {
+            "id": 3,
+            "descricao": "Black Friday",
+            "dataInicio": "2025-11-25",
+            "dataTermino": "2025-11-28",
+            "percentualDesconto": 0.30
+        },
+        "categoria": "Camisolas",
+        "qtdMinima": 3,
+        "qtdEstoque": 20
+    },
+    {
+        "_id": 4,
+        "cor": "Preto",
+        "nome": "Cueca Boxer",
+        "preco": 19.90,
+        "tamanho": "M",
+        "promocao": {
+            "id": 4,
+            "descricao": "Natal",
+            "dataInicio": "2025-12-10",
+            "dataTermino": "2025-12-25",
+            "percentualDesconto": 0.25
+        },
+        "categoria": "Boxers",
+        "qtdMinima": 20,
+        "qtdEstoque": 100
+    },
+    {
+        "_id": 5,
+        "cor": "Branco",
+        "nome": "Sutiã Comfort",
+        "preco": 39.90,
+        "tamanho": "G",
+        "promocao": {
+            "id": 5,
+            "descricao": "Outubro Rosa",
+            "dataInicio": "2025-10-01",
+            "dataTermino": "2025-10-31",
+            "percentualDesconto": 0.20
+        },
+        "categoria": "Sutiãs",
+        "qtdMinima": 8,
+        "qtdEstoque": 40
+    },
+    {
+        "_id": 6,
+        "cor": "Cinza",
+        "nome": "Cueca Slip",
+        "preco": 15.90,
+        "tamanho": "M",
+        "promocao": {
+            "id": 6,
+            "descricao": "Janeiro Branco",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-01-15",
+            "percentualDesconto": 0.05
+        },
+        "categoria": "Cuecas",
+        "qtdMinima": 15,
+        "qtdEstoque": 80
+    },
+    {
+        "_id": 7,
+        "cor": "Roxo",
+        "nome": "Robe Cetim",
+        "preco": 59.90,
+        "tamanho": "U",
+        "promocao": {
+            "id": 7,
+            "descricao": "Aniversário Loja",
+            "dataInicio": "2025-03-01",
+            "dataTermino": "2025-03-05",
+            "percentualDesconto": 0.40
+        },
+        "categoria": "Robes",
+        "qtdMinima": 4,
+        "qtdEstoque": 15
+    },
+    {
+        "_id": 8,
+        "cor": "Bordô",
+        "nome": "Conjunto Luxo",
+        "preco": 99.90,
+        "tamanho": "M",
+        "promocao": {
+            "id": 8,
+            "descricao": "Semana do Cliente",
+            "dataInicio": "2025-09-15",
+            "dataTermino": "2025-09-20",
+            "percentualDesconto": 0.18
+        },
+        "categoria": "Conjuntos",
+        "qtdMinima": 3,
+        "qtdEstoque": 12
+    },
+    {
+        "_id": 9,
+        "cor": "Bege",
+        "nome": "Meia Calça",
+        "preco": 9.90,
+        "tamanho": "U",
+        "promocao": {
+            "id": 9,
+            "descricao": "Dia das Mães",
+            "dataInicio": "2025-05-01",
+            "dataTermino": "2025-05-10",
+            "percentualDesconto": 0.22
+        },
+        "categoria": "Meias",
+        "qtdMinima": 10,
+        "qtdEstoque": 60
+    },
+    {
+        "_id": 10,
+        "cor": "Preto",
+        "nome": "Cinta Modeladora",
+        "preco": 89.90,
+        "tamanho": "G",
+        "promocao": {
+            "id": 10,
+            "descricao": "Volta às Aulas",
+            "dataInicio": "2025-02-01",
+            "dataTermino": "2025-02-10",
+            "percentualDesconto": 0.08
+        },
+        "categoria": "Acessórios",
+        "qtdMinima": 2,
+        "qtdEstoque": 10
+    },
+    {
+        "_id": 11,
+        "cor": "Rosa",
+        "nome": "Sutiã Floral",
+        "preco": 39.90,
+        "tamanho": "G",
+        "promocao": {
+            "id": 11,
+            "descricao": "Promo Primavera",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-12-31",
+            "percentualDesconto": 0.15
+        },
+        "categoria": "Sutiãs",
+        "qtdMinima": 10,
+        "qtdEstoque": 20
+    },
+    {
+        "_id": 12,
+        "cor": "Preto",
+        "nome": "Pijama Luxo",
+        "preco": 79.90,
+        "tamanho": "M",
+        "promocao": {
+            "id": 11,
+            "descricao": "Promo Primavera",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-12-31",
+            "percentualDesconto": 0.15
+        },
+        "categoria": "Pijamas",
+        "qtdMinima": 5,
+        "qtdEstoque": 15
+    },
+    {
+        "_id": 13,
+        "cor": "Azul",
+        "nome": "Cueca Boxer Sport",
+        "preco": 30.00,
+        "tamanho": "M",
+        "promocao": {
+            "id": 3,
+            "descricao": "Black Friday",
+            "dataInicio": "2025-11-25",
+            "dataTermino": "2025-11-28",
+            "percentualDesconto": 0.30
+        },
+        "categoria": "Boxers",
+        "qtdMinima": 25,
+        "qtdEstoque": 35
+    },
+    {
+        "_id": 14,
+        "cor": "Vinho",
+        "nome": "Camisola Renda",
+        "preco": 99.90,
+        "tamanho": "P",
+        "promocao": {
+            "id": 11,
+            "descricao": "Promo Primavera",
+            "dataInicio": "2025-01-01",
+            "dataTermino": "2025-12-31",
+            "percentualDesconto": 0.15
+        },
+        "categoria": "Camisolas",
+        "qtdMinima": 8,
+        "qtdEstoque": 20
+    },
+    {
+        "_id": 15,
+        "cor": "Branca",
+        "nome": "Meia Esportiva",
+        "preco": 12.00,
+        "tamanho": "U",
+        "promocao": {
+            "id": 12,
+            "descricao": "Queima de Estoque",
+            "dataInicio": "2023-01-01",
+            "dataTermino": "2023-12-31",
+            "percentualDesconto": 0.20
+        },
+        "categoria": "Meias",
+        "qtdMinima": 10,
+        "qtdEstoque": 5
+    },
+    {
+        "_id": 16,
+        "cor": "Verde",
+        "nome": "Top Cropped",
+        "preco": 45.00,
+        "tamanho": "P",
+        "promocao": {
+            "id": null,
+            "descricao": null,
+            "dataInicio": null,
+            "dataTermino": null,
+            "percentualDesconto": null
+        },
+        "categoria": "Lingerie",
+        "qtdMinima": 15,
+        "qtdEstoque": 7
+    }
+]);

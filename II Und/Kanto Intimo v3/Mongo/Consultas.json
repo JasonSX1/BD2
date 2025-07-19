@@ -59,7 +59,7 @@ db.cliente.aggregate([
     $addFields: {
       custoMedio: { $ifNull: ["$custo.custoMedio", 0] },
       custoTotalProduto: { $multiply: ["$totalVendido", { $ifNull: ["$custo.custoMedio", 0] }] },
-      categoriaNome: "$produto.categoria.nome"
+      categoriaNome: "$produto.categoria"
     }
   },
   {
@@ -82,6 +82,7 @@ db.cliente.aggregate([
   },
   { $sort: { LucroBruto: -1 } }
 ]);
+
 // ===============================================================================================================================================================================================
 /*
 2. Desempenho de Vendedores e Valor Médio por Pedido
@@ -170,7 +171,11 @@ ORDER BY ItensPromocionaisDistintosComprados DESC;
 
 db.cliente.aggregate([
   // Filtra clientes que têm pedidos
-  { $match: { pedidos: { $ne: null, $exists: true, $not: { $size: 0 } } } },
+  {
+    $match: {
+      pedidos: { $ne: null, $exists: true, $not: { $size: 0 } }
+    }
+  },
   // Explode os pedidos
   { $unwind: "$pedidos" },
   // Explode os itens de cada pedido
@@ -184,11 +189,12 @@ db.cliente.aggregate([
       as: "produto"
     }
   },
+  // Desestrutura o array resultado do $lookup
   { $unwind: "$produto" },
-  // Filtra apenas produtos com promoção
+  // Filtra apenas produtos que têm promoção definida (como objeto)
   {
     $match: {
-      "produto.promocoes": { $ne: null, $exists: true, $not: { $size: 0 } }
+      "produto.promocao": { $ne: null, $exists: true }
     }
   },
   // Agrupa por cliente e coleta os produtos distintos com promoção
@@ -202,7 +208,7 @@ db.cliente.aggregate([
       produtosPromocionais: { $addToSet: "$produto._id" }
     }
   },
-  // Conta os produtos distintos comprados com promoção
+  // Projeta os resultados
   {
     $project: {
       Cliente: "$_id.nome",
@@ -211,8 +217,12 @@ db.cliente.aggregate([
       _id: 0
     }
   },
-  // Ordena pela contagem descrescente
-  { $sort: { ItensPromocionaisDistintosComprados: -1 } }
+  // Ordena pela contagem decrescente
+  {
+    $sort: {
+      ItensPromocionaisDistintosComprados: -1
+    }
+  }
 ]);
 
 // ===============================================================================================================================================================================================

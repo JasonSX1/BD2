@@ -4,8 +4,6 @@ CREATE DATABASE kantointimo;
 USE kantointimo;
 /* Esquema Lógico: */
 
-/* Esquema Lógico: */
-
 CREATE TABLE Cliente (
     CPF CHAR (11) PRIMARY KEY,
     idEndereco INT UNSIGNED,
@@ -109,7 +107,7 @@ CREATE TABLE Produto_Promocao (
     idPromocao INT UNSIGNED NOT NULL,
     dataInicio DATE NOT NULL,
     dataTermino DATE NOT NULL,
-    PRIMARY KEY (idProduto, idPromocao)
+    PRIMARY KEY (idProduto, idPromocao, dataInicio)
 );
  
 ALTER TABLE Cliente ADD CONSTRAINT FK_Cliente_2
